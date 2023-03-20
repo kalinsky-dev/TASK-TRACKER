@@ -1,23 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+
+import { useState } from 'react'
+import Header from "./components/Header";
+import Tasks from "./components/Tasks";
+
+
 
 function App() {
+
+  const [tasks, setTasks] = useState([
+    {
+      name: 'Bug_1',
+      description: 'Bug when we start the module',
+      hoursOfWork: null,
+      takenByUser: null,
+      inProgress: false,
+      isFinished: false,
+      _createdOn: '01.01.2022',
+      _id: '1',
+      _ownerId: 'Kalin'
+    },
+    {
+      name: 'Bug_2',
+      description: 'Bug with the onboarding emails',
+      hoursOfWork: 2,
+      takenByUser: 'Ivancho',
+      inProgress: false,
+      isFinished: true,
+      _createdOn: '02.01.2022',
+      _id: '2',
+      _ownerId: 'Kalin'
+    },
+    {
+      name: 'Bug_3',
+      description: 'Bug with the Contact Us Page',
+      hoursOfWork: null,
+      takenByUser: null,
+      inProgress: false,
+      isFinished: false,
+      _createdOn: '03.01.2022',
+      _id: '3',
+      _ownerId: 'Ivancho'
+    },
+  ])
+
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Header />
+      <Tasks tasks={tasks} />
     </div>
   );
 }
