@@ -1,12 +1,12 @@
-import PropTypes from 'prop-types'
-import Button from './Button'
+import PropTypes from 'prop-types';
+import Button from './Button';
 
 
 const Header = ({ title }) => {
 
   const onClickBtn = (e) => {
     console.log(e);
-  }
+  };
 
   return (
     <header className='header'>
@@ -38,15 +38,15 @@ const Header = ({ title }) => {
       />
 
     </header>
-  )
-}
+  );
+};
 
 Header.defaultProps = {
   title: 'Task Tracker'
-}
+};
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
-}
+};
 
-export default Header
+export default Header;

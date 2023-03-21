@@ -1,7 +1,7 @@
 
-import { useState } from 'react'
+import { useState } from 'react';
 import Header from "./components/Header";
-import Tasks from "./components/Tasks";
+import Tasks from "./components/Home";
 
 
 
@@ -41,7 +41,7 @@ function App() {
       _id: '3',
       _ownerId: 'Ivancho'
     },
-  ])
+  ]);
 
   
 
@@ -51,6 +51,6 @@ function App() {
       <Tasks tasks={tasks} />
     </div>
   );
-}
+};
 
 export default App;

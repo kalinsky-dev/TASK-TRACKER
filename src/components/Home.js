@@ -1,8 +1,8 @@
-import Task from "./Task"
+import Task from "./Task";
 
 
 
-const Tasks = ({ tasks }) => {
+const Home = ({ tasks }) => {
 
   return (
     <>
@@ -10,8 +10,8 @@ const Tasks = ({ tasks }) => {
         <Task key={task._id} {...task} />
       ))}
     </>
-  )
-}
+  );
+};
 
-export default Tasks
+export default Home;
 
