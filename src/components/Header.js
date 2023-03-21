@@ -13,7 +13,7 @@ const Header = ({ title }) => {
       <h1>{title}</h1>
       <Button
         color='steelblue'
-        text='Sort by Time'
+        text='Sort'
         onClickBtn={onClickBtn}
       />
       <Button
@@ -21,6 +21,22 @@ const Header = ({ title }) => {
         text='Add'
         onClickBtn={onClickBtn}
       />
+      {/* <Button
+        color='steelblue'
+        text='Login'
+        onClickBtn={onClickBtn}
+      />
+      <Button
+        color='steelblue'
+        text='Register'
+        onClickBtn={onClickBtn}
+      /> */}
+      <Button
+        color='steelblue'
+        text='Logout'
+        onClickBtn={onClickBtn}
+      />
+
     </header>
   )
 }
