@@ -1,7 +1,8 @@
 
 import { useState } from 'react';
+import AddTask from './components/AddTask';
 import Header from "./components/Header";
-import Tasks from "./components/Home";
+import Home from "./components/Home";
 
 
 
@@ -43,12 +44,15 @@ function App() {
     },
   ]);
 
-  
+
 
   return (
     <div className="container">
       <Header />
-      <Tasks tasks={tasks} />
+      <main>
+        <Home tasks={tasks} />
+        <AddTask />
+      </main>
     </div>
   );
 };
