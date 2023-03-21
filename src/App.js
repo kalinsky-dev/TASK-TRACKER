@@ -4,6 +4,7 @@ import AddTask from './components/AddTask';
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Login from './components/Login';
+import Register from './components/Register';
 
 
 
@@ -53,6 +54,7 @@ function App() {
       <main>
         <Home tasks={tasks} />
         <Login />
+        <Register />
         {/* <AddTask /> */}
       </main>
     </div>
