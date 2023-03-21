@@ -17,7 +17,7 @@ const AddTask = () => {
       </div>
       <input type="submit" className="btn btn-block" value="Save Task" />
     </form>
-  )
-}
+  );
+};
 
-export default AddTask
+export default AddTask;
