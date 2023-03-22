@@ -6,11 +6,6 @@ import { Link, useLocation } from 'react-router-dom'
 const Header = ({ title }) => {
   const location = useLocation();
 
-  const onClickBtn = (e) => {
-    console.log(e);
-  }
-
-
   return (
     <header className='header'>
       <h1>{title}</h1>

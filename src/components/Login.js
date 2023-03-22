@@ -33,7 +33,7 @@ const Login = () => {
         <input type="text" placeholder="Add Password" name="password" value={formValues.password} onChange={onChangeHandler} />
       </div>
       <input type="submit" className="btn" value="Log In" />
-      <span>If you don't have a profile, click <Link to="/Register">here.</Link></span>
+      <span>If you don't have a profile, click <Link to="/register">here.</Link></span>
     </form>
   );
 };
