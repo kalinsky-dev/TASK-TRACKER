@@ -54,10 +54,10 @@ function App() {
       <Header />
       <main>
         <Home tasks={tasks} />
-        <Login />
+        {/* <Login /> */}
         {/* <Register /> */}
         {/* <AddTask /> */}
-        <TaskDetails />
+        {/* <TaskDetails /> */}
       </main>
     </div>
   );
