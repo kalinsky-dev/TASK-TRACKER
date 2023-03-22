@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import About from './components/About';
 import AddTask from './components/AddTask';
+import Error from './components/Error';
 import Footer from './components/Footer';
 import Header from "./components/Header";
 import Home from "./components/Home";
@@ -89,6 +90,7 @@ function App() {
           <Route path='/:taskId/delete' element={<TaskDelete
             onDeleteHandler={onDeleteHandler} />}>
           </Route>
+          <Route path='/error' element={<Error />}></Route>
           <Route path='/about' element={<About />}></Route>
         </Routes>
       </main>

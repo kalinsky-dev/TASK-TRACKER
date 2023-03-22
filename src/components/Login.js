@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../services/authService'
 
 
 const Login = () => {
-  // const [email, setEmail] = useState('');
-  // const [password, setPass] = useState('');
+  const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     email: '',
     password: '',
@@ -21,6 +20,9 @@ const Login = () => {
     login(formValues)
       .then(authData => {
         console.log(authData);
+      })
+      .catch(() => {
+        navigate('/error')
       })
   };
 
