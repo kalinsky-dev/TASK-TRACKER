@@ -12,21 +12,21 @@ const Header = ({ title }) => {
   return (
     <header className='header'>
       <h1>{title}</h1>
-      <Link to="/">
+      {/* <Link to="/">
         <Button color='steelblue' text='Sort' onClickBtn={onClickBtn} />
       </Link>
       <Link to="/create-task">
         <Button color='steelblue' text='Add' />
-      </Link>
-      {/* <Link to="/login">
+      </Link> */}
+      <Link to="/login">
         <Button color='steelblue' text='Login' />
       </Link>
       <Link to="/register">
         <Button color='steelblue' text='Register' />
-      </Link> */}
-      <Link to="/">
-        <Button color='steelblue' text='Logout' />
       </Link>
+      {/* <Link to="/">
+        <Button color='steelblue' text='Logout' />
+      </Link> */}
     </header>
   )
 }
