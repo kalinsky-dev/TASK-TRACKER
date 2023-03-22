@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { login } from '../services/authService'
 
 
 const Login = () => {
@@ -16,7 +17,11 @@ const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formValues);
+    // console.log(formValues);
+    login(formValues.email, formValues.password)
+      .then(authData => {
+        console.log(authData);
+      })
   };
 
 
