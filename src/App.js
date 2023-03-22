@@ -1,14 +1,15 @@
 
 import { useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import About from './components/About';
 import AddTask from './components/AddTask';
+import Footer from './components/Footer';
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Login from './components/Login';
 import Register from './components/Register';
 import TaskDelete from './components/TaskDelete';
 import TaskDetails from './components/TaskDetails';
-
 
 
 function App() {
@@ -85,8 +86,10 @@ function App() {
             tasks={tasks}
             onDeleteClickHandler={onDeleteClickHandler} />}></Route>
           <Route path='/:taskId/delete' element={<TaskDelete onDeleteHandler={onDeleteHandler} />}></Route>
+          <Route path='/about' element={<About />}></Route>
         </Routes>
       </main>
+      <Footer />
     </div>
   );
 };
