@@ -18,7 +18,7 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     // console.log(formValues);
-    login(formValues.email, formValues.password)
+    login(formValues)
       .then(authData => {
         console.log(authData);
       })
