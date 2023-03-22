@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 
-const Error = () => {
+const AuthError = () => {
   return (
     <div>
       <h4>Your email or password is wrong...</h4>
@@ -11,4 +11,4 @@ const Error = () => {
   );
 };
 
-export default Error;
+export default AuthError;

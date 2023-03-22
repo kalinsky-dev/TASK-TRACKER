@@ -19,10 +19,14 @@ const Login = () => {
     // console.log(formValues);
     login(formValues)
       .then(authData => {
-        console.log(authData);
+        if (authData.code === 403) {
+          navigate('/auth-error')
+        } else {
+          console.log(authData);
+        }
       })
       .catch(() => {
-        navigate('/error')
+        navigate('/server-error')
       })
   };
 
