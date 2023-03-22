@@ -24,8 +24,6 @@ const Login = () => {
       })
   };
 
-
-
   return (
     <form className="add-form" onSubmit={onSubmit}>
       <div className="form-control">
