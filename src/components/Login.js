@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 const Login = () => {
@@ -16,7 +17,7 @@ const Login = () => {
         <input type="text" placeholder="Add Password" value={password} onChange={(e) => setPass(e.target.value)} />
       </div>
       <input type="submit" className="btn" value="Log In" />
-      <span>If you don't have a profile, click <a href="#">here</a></span>
+      <span>If you don't have a profile, click <Link to="/Register">here.</Link></span>
     </form>
   );
 };

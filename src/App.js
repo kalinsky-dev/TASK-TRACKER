@@ -75,7 +75,8 @@ function App() {
       <Header />
       <main>
         <Routes>
-          <Route path='/' element={<Home tasks={tasks}
+          <Route path='/' element={<Home
+            tasks={tasks}
             onTaskClickHandler={onTaskClickHandler}
             onDeleteClickHandler={onDeleteClickHandler} />}>
           </Route>
@@ -85,7 +86,9 @@ function App() {
           <Route path='/:taskId' element={<TaskDetails
             tasks={tasks}
             onDeleteClickHandler={onDeleteClickHandler} />}></Route>
-          <Route path='/:taskId/delete' element={<TaskDelete onDeleteHandler={onDeleteHandler} />}></Route>
+          <Route path='/:taskId/delete' element={<TaskDelete
+            onDeleteHandler={onDeleteHandler} />}>
+          </Route>
           <Route path='/about' element={<About />}></Route>
         </Routes>
       </main>

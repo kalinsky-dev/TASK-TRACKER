@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { Link } from 'react-router-dom';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -19,7 +19,7 @@ const Register = () => {
         <input type="text" placeholder="Confirm Password" value={confirmPass} onChange={(e) => setConfPass(e.target.value)} />
       </div>
       <input type="submit" className="btn" value="Register" />
-      <span>If you already have profile click <a href="#">here</a></span>
+      <span>If you already have a profile, click <Link to="/login">here.</Link></span>
     </form>
   );
 };
