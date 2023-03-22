@@ -48,14 +48,28 @@ function App() {
     },
   ]);
 
+  const navigate = useNavigate();
 
+  const onTaskClickHandler = (taskId) => {
+    console.log(taskId);
+    navigate(`/${taskId}`)
+  }
+
+  const onDeleteClickHandler = (taskId, e) => {
+    e?.preventDefault();
+    console.log(taskId);
+    navigate(`/${taskId}/delete`)
+  }
 
   return (
     <div className="container">
       <Header />
       <main>
         <Routes>
-          <Route path='/' element={<Home tasks={tasks} />}></Route>
+          <Route path='/' element={<Home tasks={tasks}
+            onTaskClickHandler={onTaskClickHandler}
+            onDeleteClickHandler={onDeleteClickHandler} />}>
+          </Route>
           <Route path='/login' element={<Login />}></Route>
           <Route path='/register' element={<Register />}></Route>
           <Route path='/create-task' element={<AddTask />}></Route>
