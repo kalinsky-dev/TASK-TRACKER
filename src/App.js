@@ -54,21 +54,21 @@ function App() {
 
   const onTaskClickHandler = (taskId) => {
     console.log(taskId);
-    navigate(`/${taskId}`)
-  }
+    navigate(`/${taskId}`);
+  };
 
   const onDeleteClickHandler = (taskId, e) => {
     e?.preventDefault();
     console.log(taskId);
-    navigate(`/${taskId}/delete`)
-  }
+    navigate(`/${taskId}/delete`);
+  };
 
   const onDeleteHandler = (taskId, e) => {
     e?.preventDefault();
     console.log(taskId);
-    setTasks(tasks.filter((task) => task._id !== taskId))
-    navigate('/')
-  }
+    setTasks(tasks.filter((task) => task._id !== taskId));
+    navigate('/');
+  };
 
   return (
     <div className="container">

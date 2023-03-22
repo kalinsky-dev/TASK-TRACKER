@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom';
 
 
 
@@ -15,9 +15,9 @@ const TaskDelete = ({
       <Link to="/"><input type="submit" className="btn" value="Back" /></Link>
       <Link to="/"><input type="submit" className="btn" value="Delete" style={{ backgroundColor: 'red' }} onClick={(e) => onDeleteHandler(taskId, e)} /></Link>
     </form>
-  )
-}
+  );
+};
 
-export default TaskDelete
+export default TaskDelete;
 
 

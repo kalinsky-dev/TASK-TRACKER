@@ -1,4 +1,4 @@
-import Task from "./Task"
+import Task from "./Task";
 
 
 const Home = ({
@@ -16,8 +16,8 @@ const Home = ({
         />
       ))}
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
 

@@ -1,4 +1,4 @@
-import { FaTimes } from 'react-icons/fa'
+import { FaTimes } from 'react-icons/fa';
 // import { useState } from 'react';
 
 
@@ -33,8 +33,8 @@ const Task = ({
       {isFinished && <p>Task is resolved for: {hoursOfWork} hours.</p>}
       {/* {showDeleteUser && <UserDelete onClose={onClose} onDelete={onDeleteHandler} />} */}
     </div>
-  )
-}
+  );
+};
 
-export default Task
+export default Task;
 

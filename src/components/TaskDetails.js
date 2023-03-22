@@ -32,7 +32,7 @@ const TaskDetails = ({
         <h2>This Task is in Progress!</h2>
         <Link to="/">Go Back</Link>
       </div>
-    )
+    );
   } else if (isFinished) {
     return (
       <form className="add-form">
@@ -45,7 +45,7 @@ const TaskDetails = ({
         </div>
         <input type="submit" className="btn" value="Delete" style={{ backgroundColor: 'red' }} onClick={(e) => onDeleteClickHandler(taskId, e)} />
       </form>
-    )
+    );
   } else {
     return (
       <form className="add-form">
@@ -64,10 +64,8 @@ const TaskDetails = ({
         {(ifOwner && !inProgress) && <input type="submit" className="btn" value="Edit" />}
         {(ifOwner && !inProgress) && <input type="submit" className="btn" value="Delete" style={{ backgroundColor: 'red' }} onClick={(e) => onDeleteClickHandler(taskId, e)} />}
       </form>
-    )
-  }
+    );
+  };
+};
 
-
-}
-
-export default TaskDetails
+export default TaskDetails;

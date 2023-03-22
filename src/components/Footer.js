@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom";
 
 
 
@@ -9,7 +9,7 @@ const Footer = () => {
       <p>Copyright &copy; 2023</p>
       {location.pathname !== '/about' && (<Link to="/about">About</Link>)}
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
