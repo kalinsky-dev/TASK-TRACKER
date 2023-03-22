@@ -73,7 +73,9 @@ function App() {
           <Route path='/login' element={<Login />}></Route>
           <Route path='/register' element={<Register />}></Route>
           <Route path='/create-task' element={<AddTask />}></Route>
-          <Route path='/:taskId' element={<TaskDetails tasks={tasks} />}></Route>
+          <Route path='/:taskId' element={<TaskDetails
+            tasks={tasks}
+            onDeleteClickHandler={onDeleteClickHandler} />}></Route>
         </Routes>
       </main>
     </div>

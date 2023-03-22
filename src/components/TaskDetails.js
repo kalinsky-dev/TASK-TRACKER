@@ -23,7 +23,7 @@ const TaskDetails = ({
   // const ifUserWhoTakesTheTask = userId === takenByUser;
   const ifOwner = true;
   const UserWhoTakesTheTask = false;
-  inProgress = true;
+  inProgress = false;
   isFinished = false;
 
   if (inProgress && !UserWhoTakesTheTask) {
