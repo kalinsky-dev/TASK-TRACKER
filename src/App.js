@@ -92,7 +92,7 @@ function App() {
             onDeleteHandler={onDeleteHandler} />}>
           </Route>
           <Route path='/auth-error' element={<AuthError />}></Route>
-          <Route path='/server-error' element={<ServerError />}></Route>
+          <Route path='/404' element={<ServerError />}></Route>
           <Route path='/about' element={<About />}></Route>
         </Routes>
       </main>

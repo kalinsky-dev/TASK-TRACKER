@@ -26,7 +26,7 @@ const Login = () => {
         }
       })
       .catch(() => {
-        navigate('/server-error')
+        navigate('/404')
       })
   };
 
