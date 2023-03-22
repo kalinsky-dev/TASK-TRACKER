@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import Login from './components/Login';
 import Register from './components/Register';
+import TaskDelete from './components/TaskDelete';
 import TaskDetails from './components/TaskDetails';
 
 
@@ -61,6 +62,13 @@ function App() {
     navigate(`/${taskId}/delete`)
   }
 
+  const onDeleteHandler = (taskId, e) => {
+    e?.preventDefault();
+    console.log(taskId);
+    setTasks(tasks.filter((task) => task._id !== taskId))
+    navigate('/')
+  }
+
   return (
     <div className="container">
       <Header />
@@ -76,6 +84,7 @@ function App() {
           <Route path='/:taskId' element={<TaskDetails
             tasks={tasks}
             onDeleteClickHandler={onDeleteClickHandler} />}></Route>
+          <Route path='/:taskId/delete' element={<TaskDelete onDeleteHandler={onDeleteHandler} />}></Route>
         </Routes>
       </main>
     </div>
