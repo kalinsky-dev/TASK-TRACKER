@@ -1,5 +1,6 @@
 
 import { useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import AddTask from './components/AddTask';
 import Header from "./components/Header";
 import Home from "./components/Home";
@@ -53,11 +54,13 @@ function App() {
     <div className="container">
       <Header />
       <main>
-        <Home tasks={tasks} />
-        {/* <Login /> */}
-        {/* <Register /> */}
-        {/* <AddTask /> */}
-        {/* <TaskDetails /> */}
+        <Routes>
+          <Route path='/' element={<Home tasks={tasks} />}></Route>
+          <Route path='/login' element={<Login />}></Route>
+          <Route path='/register' element={<Register />}></Route>
+          <Route path='/create-task' element={<AddTask />}></Route>
+          <Route path='/:taskId' element={<TaskDetails tasks={tasks} />}></Route>
+        </Routes>
       </main>
     </div>
   );
