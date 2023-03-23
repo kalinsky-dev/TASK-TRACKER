@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { AuthContext } from "../../contexts/AuthContext";
+import { AuthContext } from "../contexts/AuthContext";
 import * as authService from '../services/authService'
 
 const Register = () => {
@@ -16,22 +16,19 @@ const Register = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    
+
     // console.log(formValues);
     if (formValues.password !== formValues.confirmPass) {
       return;
     }
 
-    authService.login(formValues)
+    authService.register(formValues)
       .then(authData => {
-        if (authData.code === 403) {
-          navigate('/auth-error')
-        } else {
-          // console.log(authData);
-          userLoginHandler(authData);
-          navigate('/');
-        }
-      })
+        // console.log(authData);
+        userLoginHandler(authData);
+        navigate('/');
+      }
+      )
       .catch(() => {
         navigate('/404')
       })
