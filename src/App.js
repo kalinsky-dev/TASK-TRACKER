@@ -57,9 +57,11 @@ function App() {
 
   const [auth, setAuth] = useState({});
   const navigate = useNavigate();
+
   const userLoginHandler = (authData) => {
     setAuth(authData)
   }
+  
   const userLogoutHandler = (authData) => {
     setAuth({})
   }
