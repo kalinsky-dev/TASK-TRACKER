@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from './contexts/AuthContext';
+import { useLocalStorage } from './hooks/useLocalStorage';
 
 import About from './components/About';
 import AddTask from './components/AddTask';
@@ -55,13 +56,13 @@ function App() {
     },
   ]);
 
-  const [auth, setAuth] = useState({});
+  const [auth, setAuth] = useLocalStorage('auth', {});
   const navigate = useNavigate();
 
   const userLoginHandler = (authData) => {
     setAuth(authData)
   }
-  
+
   const userLogoutHandler = (authData) => {
     setAuth({})
   }
