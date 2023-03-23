@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+
+import { AuthContext } from '../contexts/AuthContext';
 import { login } from '../services/authService'
 
-
 const Login = () => {
+  const { userLoginHandler } = useContext(AuthContext);
   const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
     email: '',
@@ -23,6 +26,8 @@ const Login = () => {
           navigate('/auth-error')
         } else {
           console.log(authData);
+          userLoginHandler(authData);
+          navigate('/');
         }
       })
       .catch(() => {
