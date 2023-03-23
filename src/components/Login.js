@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 
 import { AuthContext } from '../contexts/AuthContext';
-import { login } from '../services/authService'
+import * as authService from '../services/authService'
 
 const Login = () => {
   const { userLoginHandler } = useContext(AuthContext);
@@ -20,12 +20,12 @@ const Login = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     // console.log(formValues);
-    login(formValues)
+    authService.login(formValues)
       .then(authData => {
         if (authData.code === 403) {
           navigate('/auth-error')
         } else {
-          console.log(authData);
+          // console.log(authData);
           userLoginHandler(authData);
           navigate('/');
         }

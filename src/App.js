@@ -53,7 +53,7 @@ function App() {
       _ownerId: 'Ivancho'
     },
   ]);
-  
+
   const [auth, setAuth] = useState({});
   const userLoginHandler = (authData) => {
     setAuth(authData)
@@ -79,7 +79,7 @@ function App() {
   };
 
   return (
-    <AuthContext.Provider value={{ auth, userLoginHandler }}>
+    <AuthContext.Provider value={{ user: auth, userLoginHandler }}>
       <div className="container">
         <Header />
         <main>
