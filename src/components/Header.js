@@ -15,32 +15,36 @@ const Header = ({ title }) => {
   }
 
   return (
-    <header className='header'>
-      <h1>{title}</h1>
-      {user.email ?
-        <div>
-          <Link to="/">
-            <Button color='steelblue' text='Sort' onClickBtn={onSortHandler} />
-          </Link>
-          <Link to="/create-task">
-            <Button color='steelblue' text='Add' />
-          </Link>
-          <Link to="/">
-            <Button color='steelblue' text='Logout' />
-          </Link>
-        </div> :
-        <div>
-          {(location.pathname !== '/login' && location.pathname !== '/register') &&
-            < Link to="/login">
-              <Button color='steelblue' text='Login' />
-            </Link>}
-          {(location.pathname !== '/login' && location.pathname !== '/register') &&
-            <Link to="/register">
-              <Button color='steelblue' text='Register' />
-            </Link>}
-        </div>
-      }
-    </header >
+    <>
+      <header className='header'>
+        <h1>{title}</h1>
+        {user.email ?
+          <div>
+            <Link to="/">
+              <Button color='steelblue' text='Sort' onClickBtn={onSortHandler} />
+            </Link>
+            <Link to="/create-task">
+              <Button color='steelblue' text='Add' />
+            </Link>
+            <Link to="/">
+              <Button color='steelblue' text='Logout' />
+            </Link>
+          </div> :
+          <div>
+            {(location.pathname !== '/login' && location.pathname !== '/register') &&
+              < Link to="/login">
+                <Button color='steelblue' text='Login' />
+              </Link>}
+            {(location.pathname !== '/login' && location.pathname !== '/register') &&
+              <Link to="/register">
+                <Button color='steelblue' text='Register' />
+              </Link>}
+          </div>
+        }
+      </header >
+      {user.email && <h4>Welcome: {user.email}</h4>}
+    </>
+
   )
 }
 
