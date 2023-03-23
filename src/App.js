@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Login from './components/Login';
+import Logout from './components/Logout';
 import Register from './components/Register';
 import ServerError from './components/ServerError';
 import TaskDelete from './components/TaskDelete';
@@ -55,10 +56,13 @@ function App() {
   ]);
 
   const [auth, setAuth] = useState({});
+  const navigate = useNavigate();
   const userLoginHandler = (authData) => {
     setAuth(authData)
   }
-  const navigate = useNavigate();
+  const userLogoutHandler = (authData) => {
+    setAuth({})
+  }
 
   const onTaskClickHandler = (taskId) => {
     console.log(taskId);
@@ -79,7 +83,7 @@ function App() {
   };
 
   return (
-    <AuthContext.Provider value={{ user: auth, userLoginHandler }}>
+    <AuthContext.Provider value={{ user: auth, userLoginHandler, userLogoutHandler }}>
       <div className="container">
         <Header />
         <main>
@@ -91,6 +95,7 @@ function App() {
             </Route>
             <Route path='/login' element={<Login />}></Route>
             <Route path='/register' element={<Register />}></Route>
+            <Route path='/logout' element={<Logout />}></Route>
             <Route path='/create-task' element={<AddTask />}></Route>
             <Route path='/:taskId' element={<TaskDetails
               tasks={tasks}

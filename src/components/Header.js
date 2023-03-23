@@ -26,7 +26,7 @@ const Header = ({ title }) => {
             <Link to="/create-task">
               <Button color='steelblue' text='Add' />
             </Link>
-            <Link to="/">
+            <Link to="/logout">
               <Button color='steelblue' text='Logout' />
             </Link>
           </div> :
