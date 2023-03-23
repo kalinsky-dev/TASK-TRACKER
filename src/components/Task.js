@@ -26,7 +26,7 @@ const Task = ({
   return (
     <div className='task' onDoubleClick={() => onTaskClickHandler(_id)}>
       {isFinished ? <h3>{name} <FaTimes style={{ color: 'red', cursor: 'pointer' }} onClick={() => onDeleteClickHandler(_id)} /> </h3> : <h3>{name}</h3>}
-      <p>Description: {description}</p>
+      <h4>Description: {description}</h4>
       <p>Task is created by: {_ownerId}</p>
       {takenByUser ? <p>Task is taken by: {takenByUser}</p> : <p>This task is not taken yet!</p>}
       {inProgress && <p>Task is in progress!</p>}
