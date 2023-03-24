@@ -96,6 +96,8 @@ function App() {
         _id: uniqid(),
       },
     ]);
+
+    navigate('/');
   };
 
   useEffect(() => {

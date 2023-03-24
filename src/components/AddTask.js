@@ -6,8 +6,8 @@ const AddTask = ({ addTaskHandler }) => {
   // const [taskDescr, setDescr] = useState('');
 
   const [formValues, setFormValues] = useState({
-    taskName: '',
-    taskDescr: '',
+    name: '',
+    description: '',
   })
 
 
@@ -28,9 +28,9 @@ const AddTask = ({ addTaskHandler }) => {
     <form className="add-form" onSubmit={onSubmit}>
       <div className="form-control">
         <label>Name of the Task</label>
-        <input type="text" placeholder="Add Task" name="taskName" value={formValues.taskName} onChange={onChangeHandler} />
+        <input type="text" placeholder="Add Task" name="name" value={formValues.name} onChange={onChangeHandler} />
         <label>Description of the Task</label>
-        <input type="text" placeholder="Add Description" name="taskDescr" value={formValues.taskDescr} onChange={onChangeHandler} />
+        <input type="text" placeholder="Add Description" name="description" value={formValues.description} onChange={onChangeHandler} />
       </div>
       <input type="submit" className="btn btn-block" value="Save Task" />
     </form>
