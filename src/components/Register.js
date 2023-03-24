@@ -68,7 +68,10 @@ const Register = () => {
       errorMessage = 'Password must be longer than 4 characters!'
     } else if (confirmPass.length > 10) {
       errorMessage = 'Username must be shorter than 10 characters!'
-    } else if (confirmPass !== error.password) {
+    } else if (confirmPass !== formValues.password) {
+      console.log(error);
+      console.log(confirmPass !== error.password);
+      
       errorMessage = 'Passwords must match!'
     }
 
