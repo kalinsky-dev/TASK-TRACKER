@@ -5,9 +5,9 @@ import { useParams, Link } from 'react-router-dom';
 const TaskDetails = ({
   name,
   description,
-  hoursOfWork,
-  takenByUser,
   inProgress,
+  takenByUser,
+  hoursOfWork,
   isFinished,
   _createdOn,
   _id,
