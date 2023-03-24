@@ -20,7 +20,7 @@ const AddTask = ({ addTaskHandler }) => {
 
     console.log(formValues);
 
-    addTaskHandler(formValues)
+    addTaskHandler(formValues);
   }
 
 
