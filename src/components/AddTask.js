@@ -3,11 +3,13 @@ import { useState, useContext } from 'react';
 
 import * as taskService from '../services/taskService'
 import { AuthContext } from "../contexts/AuthContext";
+import { TaskContext } from "../contexts/TaskContext";
 
 
-const AddTask = ({ addTaskHandler }) => {
+const AddTask = () => {
   // const [taskName, setName] = useState('');
   // const [taskDescr, setDescr] = useState('');
+  const { addTaskHandler } = useContext(TaskContext)
   const { user } = useContext(AuthContext);
 
   const [formValues, setFormValues] = useState({
