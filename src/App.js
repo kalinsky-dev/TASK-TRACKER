@@ -88,15 +88,8 @@ function App() {
     navigate('/');
   };
 
-  const addTaskHandler = (gameData) => {
-    setTasks(state => [
-      ...state,
-      {
-        ...gameData,
-        _id: uniqid(),
-      },
-    ]);
-
+  const addTaskHandler = (taskData) => {
+    setTasks(state => [...state, taskData]);
     navigate('/');
   };
 
@@ -115,7 +108,7 @@ function App() {
             setTasks(result);
           }
         });
-  }, []);
+  }, [auth.email]);
 
   return (
     <AuthContext.Provider value={{ user: auth, userLoginHandler, userLogoutHandler }}>
