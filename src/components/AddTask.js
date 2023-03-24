@@ -1,9 +1,14 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+
+
+import * as taskService from '../services/taskService'
+import { AuthContext } from "../contexts/AuthContext";
 
 
 const AddTask = ({ addTaskHandler }) => {
   // const [taskName, setName] = useState('');
   // const [taskDescr, setDescr] = useState('');
+  const { user } = useContext(AuthContext);
 
   const [formValues, setFormValues] = useState({
     name: '',
@@ -15,12 +20,35 @@ const AddTask = ({ addTaskHandler }) => {
     setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
   }
 
+  let taskData = {
+    name: '',
+    description: '',
+    owner: '',
+    inProgress: false,
+    takenByUser: false,
+    hoursOfWork: 0,
+    isFinished: false,
+  }
+
   const onSubmit = (e) => {
     e.preventDefault();
 
-    console.log(formValues);
+    // console.log(formValues);
 
-    addTaskHandler(formValues);
+    taskData.name = formValues.name;
+    taskData.description = formValues.description;
+    taskData.owner = user.email;
+
+    // console.log(taskData);
+
+
+    taskService.create(taskData)
+      .then(result => {
+        // console.log(result);
+        addTaskHandler(result);
+      })
+
+    // addTaskHandler(formValues);
   }
 
 
