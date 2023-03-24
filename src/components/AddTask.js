@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 
-const AddTask = () => {
+const AddTask = ({ addTaskHandler }) => {
   // const [taskName, setName] = useState('');
   // const [taskDescr, setDescr] = useState('');
 
@@ -20,6 +20,7 @@ const AddTask = () => {
 
     console.log(formValues);
 
+    addTaskHandler(formValues)
   }
 
 

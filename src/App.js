@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import uniqid from 'uniqid';
 
 import { AuthContext } from './contexts/AuthContext';
 import { useLocalStorage } from './hooks/useLocalStorage';
@@ -87,6 +88,16 @@ function App() {
     navigate('/');
   };
 
+  const addTaskHandler = (gameData) => {
+    setTasks(state => [
+      ...state,
+      {
+        ...gameData,
+        _id: uniqid(),
+      },
+    ]);
+  };
+
   useEffect(() => {
     taskService.getAll()
       .then(
@@ -118,7 +129,7 @@ function App() {
             <Route path='/login' element={<Login />}></Route>
             <Route path='/register' element={<Register />}></Route>
             <Route path='/logout' element={<Logout />}></Route>
-            <Route path='/create-task' element={<AddTask />}></Route>
+            <Route path='/create-task' element={<AddTask addTaskHandler={addTaskHandler} />}></Route>
             <Route path='/:taskId' element={<TaskDetails
               tasks={tasks}
               onDeleteClickHandler={onDeleteClickHandler} />}></Route>
@@ -135,5 +146,6 @@ function App() {
     </AuthContext.Provider>
   );
 };
+
 
 export default App;
