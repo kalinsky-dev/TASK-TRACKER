@@ -1,9 +1,9 @@
 
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import uniqid from 'uniqid';
 
 import { AuthContext } from './contexts/AuthContext';
+import { TaskContext } from './contexts/TaskContext';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import * as taskService from './services/taskService';
 
@@ -104,7 +104,7 @@ function App() {
           } else if (result.code === Number(404) && auth.email !== undefined) {
             navigate('/create-task')
           } else {
-            console.log(result);
+            // console.log(result);
             setTasks(result);
           }
         });
@@ -114,31 +114,33 @@ function App() {
     <AuthContext.Provider value={{ user: auth, userLoginHandler, userLogoutHandler }}>
       <div className="container">
         <Header />
-        <main>
-          <Routes>
-            <Route path='/' element={<Home
-              tasks={tasks}
-              onTaskClickHandler={onTaskClickHandler}
-              onDeleteClickHandler={onDeleteClickHandler} />}>
-            </Route>
-            <Route path='/login' element={<Login />}></Route>
-            <Route path='/register' element={<Register />}></Route>
-            <Route path='/logout' element={<Logout />}></Route>
-            <Route path='/create-task' element={<AddTask addTaskHandler={addTaskHandler} />}></Route>
-            <Route path='/:taskId' element={<TaskDetails
-              tasks={tasks}
-              onDeleteClickHandler={onDeleteClickHandler} />}></Route>
-            <Route path='/:taskId/delete' element={<TaskDelete
-              onDeleteHandler={onDeleteHandler} />}>
-            </Route>
-            <Route path='/auth-error' element={<AuthError />}></Route>
-            <Route path='/404' element={<ServerError />}></Route>
-            <Route path='/about' element={<About />}></Route>
-          </Routes>
-        </main>
+        <TaskContext.Provider value={{ tasks, addTaskHandler }}>
+          <main>
+            <Routes>
+              <Route path='/' element={<Home
+                tasks={tasks}
+                onTaskClickHandler={onTaskClickHandler}
+                onDeleteClickHandler={onDeleteClickHandler} />}>
+              </Route>
+              <Route path='/login' element={<Login />}></Route>
+              <Route path='/register' element={<Register />}></Route>
+              <Route path='/logout' element={<Logout />}></Route>
+              <Route path='/create-task' element={<AddTask />}></Route>
+              <Route path='/:taskId' element={<TaskDetails
+                tasks={tasks}
+                onDeleteClickHandler={onDeleteClickHandler} />}></Route>
+              <Route path='/:taskId/delete' element={<TaskDelete
+                onDeleteHandler={onDeleteHandler} />}>
+              </Route>
+              <Route path='/auth-error' element={<AuthError />}></Route>
+              <Route path='/404' element={<ServerError />}></Route>
+              <Route path='/about' element={<About />}></Route>
+            </Routes>
+          </main>
+        </TaskContext.Provider>
         <Footer />
       </div>
-    </AuthContext.Provider>
+    </AuthContext.Provider >
   );
 };
 
