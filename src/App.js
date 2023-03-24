@@ -1,9 +1,10 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from './contexts/AuthContext';
 import { useLocalStorage } from './hooks/useLocalStorage';
+import * as taskService from './services/taskService';
 
 import About from './components/About';
 import AddTask from './components/AddTask';
@@ -20,44 +21,45 @@ import TaskDetails from './components/TaskDetails';
 
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      name: 'Bug_1',
-      description: 'Bug when we start the module',
-      hoursOfWork: null,
-      takenByUser: null,
-      inProgress: false,
-      isFinished: false,
-      _createdOn: '01.01.2022',
-      _id: '1',
-      _ownerId: 'Kalin'
-    },
-    {
-      name: 'Bug_2',
-      description: 'Bug with the onboarding emails',
-      hoursOfWork: 2,
-      takenByUser: 'Ivancho',
-      inProgress: false,
-      isFinished: true,
-      _createdOn: '02.01.2022',
-      _id: '2',
-      _ownerId: 'Kalin'
-    },
-    {
-      name: 'Bug_3',
-      description: 'Bug with the Contact Us Page',
-      hoursOfWork: null,
-      takenByUser: null,
-      inProgress: false,
-      isFinished: false,
-      _createdOn: '03.01.2022',
-      _id: '3',
-      _ownerId: 'Ivancho'
-    },
-  ]);
-
+  const [tasks, setTasks] = useState([]);
   const [auth, setAuth] = useLocalStorage('auth', {});
   const navigate = useNavigate();
+  // const [tasks, setTasks] = useState([
+  //   {
+  //     name: 'Bug_1',
+  //     description: 'Bug when we start the module',
+  //     hoursOfWork: null,
+  //     takenByUser: null,
+  //     inProgress: false,
+  //     isFinished: false,
+  //     _createdOn: '01.01.2022',
+  //     _id: '1',
+  //     _ownerId: 'Kalin'
+  //   },
+  //   {
+  //     name: 'Bug_2',
+  //     description: 'Bug with the onboarding emails',
+  //     hoursOfWork: 2,
+  //     takenByUser: 'Ivancho',
+  //     inProgress: false,
+  //     isFinished: true,
+  //     _createdOn: '02.01.2022',
+  //     _id: '2',
+  //     _ownerId: 'Kalin'
+  //   },
+  //   {
+  //     name: 'Bug_3',
+  //     description: 'Bug with the Contact Us Page',
+  //     hoursOfWork: null,
+  //     takenByUser: null,
+  //     inProgress: false,
+  //     isFinished: false,
+  //     _createdOn: '03.01.2022',
+  //     _id: '3',
+  //     _ownerId: 'Ivancho'
+  //   },
+  // ]);
+
 
   const userLoginHandler = (authData) => {
     setAuth(authData)
@@ -84,6 +86,23 @@ function App() {
     setTasks(tasks.filter((task) => task._id !== taskId));
     navigate('/');
   };
+
+  useEffect(() => {
+    taskService.getAll()
+      .then(
+        result => {
+          // console.log(auth.email);
+          // console.log(typeof result.code);
+          if (auth.email === undefined) {
+            navigate('/register')
+          } else if (result.code === Number(404) && auth.email !== undefined) {
+            navigate('/create-task')
+          } else {
+            console.log(result);
+            setTasks(result);
+          }
+        });
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user: auth, userLoginHandler, userLogoutHandler }}>
