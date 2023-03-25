@@ -76,15 +76,21 @@ function App() {
   };
 
   const onEditHandler = (taskId, e) => {
-    e?.preventDefault();
-    console.log(taskId);
-    navigate(`/`);
+    e.preventDefault();
+    console.log('Edit' + ' ' + taskId);
+    // navigate(`/`);
+  };
+
+  const onTakeItHandler = (taskId, e) => {
+    e.preventDefault();
+    console.log('TakeIt' + ' ' + taskId);
+    // navigate(`/`);
   };
 
   const onFinishHandler = (taskId, e) => {
-    e?.preventDefault();
-    console.log(taskId);
-    navigate(`/`);
+    e.preventDefault();
+    console.log('Finish' + ' ' + taskId);
+    // navigate(`/`);
   };
 
   const onDeleteHandler = (taskId, e) => {
@@ -142,8 +148,9 @@ function App() {
               <Route path='/create-task' element={<AddTask />}></Route>
               <Route path='/:taskId' element={<TaskDetails
                 tasks={tasks}
-                onEditClickHandler={onEditHandler}
-                onFinishClickHandler={onFinishHandler}
+                onEditHandler={onEditHandler}
+                onTakeItHandler={onTakeItHandler}
+                onFinishHandler={onFinishHandler}
                 onDeleteClickHandler={onDeleteClickHandler} />}>
               </Route>
               <Route path='/:taskId/delete' element={<TaskDelete
