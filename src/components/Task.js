@@ -5,10 +5,10 @@ import { FaTimes } from 'react-icons/fa';
 const Task = ({
   name,
   description,
-  hoursOfWork,
-  takenByUser,
-  inProgress,
   owner,
+  inProgress,
+  takenByUser,
+  hoursOfWork,
   isFinished,
   _createdOn,
   _id,
