@@ -75,6 +75,18 @@ function App() {
     navigate(`/${taskId}`);
   };
 
+  const onEditClickHandler = (taskId, e) => {
+    e?.preventDefault();
+    console.log(taskId);
+    navigate(`/`);
+  };
+
+  const onFinishClickHandler = (taskId, e) => {
+    e?.preventDefault();
+    console.log(taskId);
+    navigate(`/`);
+  };
+
   const onDeleteClickHandler = (taskId, e) => {
     e?.preventDefault();
     console.log(taskId);
@@ -128,7 +140,10 @@ function App() {
               <Route path='/create-task' element={<AddTask />}></Route>
               <Route path='/:taskId' element={<TaskDetails
                 tasks={tasks}
-                onDeleteClickHandler={onDeleteClickHandler} />}></Route>
+                onEditClickHandler={onEditClickHandler}
+                onFinishClickHandler={onFinishClickHandler}
+                onDeleteClickHandler={onDeleteClickHandler} />}>
+              </Route>
               <Route path='/:taskId/delete' element={<TaskDelete
                 onDeleteHandler={onDeleteHandler} />}>
               </Route>

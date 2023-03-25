@@ -5,7 +5,8 @@ import { AuthContext } from '../contexts/AuthContext';
 import * as taskService from '../services/taskService'
 
 const TaskDetails = ({
-  onTaskClickHandler,
+  onEditClickHandler,
+  onFinishClickHandler,
   onDeleteClickHandler
 }) => {
   const [currentTask, setCurrentTask] = useState({});
@@ -55,7 +56,7 @@ const TaskDetails = ({
       })
   }, [])
 
- 
+
   const ifOwner = user.email === currentTask.owner;
   const inProgress = currentTask.inProgress;
   const isFinished = currentTask.isFinished;
@@ -112,8 +113,8 @@ const TaskDetails = ({
             />)}
         </div>
         {!inProgress && <input type="submit" className="btn" value="Take it" />}
-        {(inProgress && ifOwner) && <input type="submit" className="btn" value="Finish" />}
-        {(ifOwner && !inProgress) && <input type="submit" className="btn" value="Edit" />}
+        {(inProgress && ifOwner) && <input type="submit" className="btn" value="Finish" onClick={(e) => onFinishClickHandler(taskId, e)} />}
+        {(ifOwner && !inProgress) && <input type="submit" className="btn" value="Edit" onClick={(e) => onEditClickHandler(taskId, e)} />}
         {(ifOwner && !inProgress) && <input type="submit" className="btn" value="Delete" style={{ backgroundColor: 'red' }} onClick={(e) => onDeleteClickHandler(taskId, e)} />}
       </form>
     );
