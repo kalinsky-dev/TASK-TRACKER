@@ -5,16 +5,6 @@ import { AuthContext } from '../contexts/AuthContext';
 import * as taskService from '../services/taskService'
 
 const TaskDetails = ({
-  name,
-  description,
-  owner,
-  inProgress,
-  takenByUser,
-  hoursOfWork,
-  isFinished,
-  _createdOn,
-  _id,
-  _ownerId,
   onTaskClickHandler,
   onDeleteClickHandler
 }) => {
@@ -22,7 +12,6 @@ const TaskDetails = ({
   const { user } = useContext(AuthContext);
   const { taskId } = useParams();
   const navigate = useNavigate();
-
 
 
   const [formValues, setFormValues] = useState({
@@ -54,30 +43,24 @@ const TaskDetails = ({
     //   })
   };
 
-
-
-  // const ifOwner = user.email === owner;
-  const ifOwner = true;
-
-  inProgress = false;
-  isFinished = false;
-
-  hoursOfWork = 5;
-  takenByUser = 'george@abv.bg';
-
-
   useEffect(() => {
     taskService.getOne(taskId)
       .then(taskData => {
-        console.log(taskData);
+        // console.log(taskData);
         setCurrentTask(taskData)
         if (taskData) {
-          console.log(taskData)
+          // console.log(taskData)
           setFormValues(state => ({ ...state, name: taskData.name, description: taskData.description }))
         }
       })
   }, [])
 
+ 
+  const ifOwner = user.email === currentTask.owner;
+  const inProgress = currentTask.inProgress;
+  const isFinished = currentTask.isFinished;
+  const hoursOfWork = currentTask.hoursOfWork;
+  const takenByUser = currentTask.takenByUser;
 
   if (!ifOwner && inProgress) {
     return (
