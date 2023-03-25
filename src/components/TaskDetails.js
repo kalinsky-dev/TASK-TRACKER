@@ -18,16 +18,12 @@ const TaskDetails = ({
   onTaskClickHandler,
   onDeleteClickHandler
 }) => {
+  const [currentTask, setCurrentTask] = useState({});
   const { user } = useContext(AuthContext);
   const { taskId } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    taskService.getOne(taskId)
-      .then(taskData => {
-        console.log(taskData);
-      })
-  }, [])
+
 
   const [formValues, setFormValues] = useState({
     name: '',
@@ -70,7 +66,17 @@ const TaskDetails = ({
   takenByUser = 'george@abv.bg';
 
 
-
+  useEffect(() => {
+    taskService.getOne(taskId)
+      .then(taskData => {
+        console.log(taskData);
+        setCurrentTask(taskData)
+        if (taskData) {
+          console.log(taskData)
+          setFormValues(state => ({ ...state, name: taskData.name, description: taskData.description }))
+        }
+      })
+  }, [])
 
 
   if (!ifOwner && inProgress) {
