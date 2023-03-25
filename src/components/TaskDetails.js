@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from '../contexts/AuthContext';
@@ -21,8 +21,14 @@ const TaskDetails = ({
   const { user } = useContext(AuthContext);
   const { taskId } = useParams();
   const navigate = useNavigate();
-  // const [taskName, setName] = useState('');
-  // const [taskDescr, setDescr] = useState('');
+
+  useEffect(() => {
+    taskService.getOne(taskId)
+      .then(taskData => {
+        console.log(taskData);
+      })
+  }, [])
+
   const [formValues, setFormValues] = useState({
     name: '',
     description: '',
@@ -35,7 +41,7 @@ const TaskDetails = ({
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(e);
-    
+
     // console.log(formValues);
     // taskService.create(formValues)
     //   .then(authData => {
@@ -43,7 +49,7 @@ const TaskDetails = ({
     //       navigate('/auth-error')
     //     } else {
     //       console.log(authData);
-    //       // userLoginHandler(authData);
+    //       userLoginHandler(authData);
     //       navigate('/');
     //     }
     //   })
@@ -52,8 +58,8 @@ const TaskDetails = ({
     //   })
   };
 
- 
-  
+
+
   // const ifOwner = user.email === owner;
   const ifOwner = true;
 
