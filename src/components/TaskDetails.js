@@ -1,6 +1,8 @@
-import { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useState, useContext } from 'react';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
+import { AuthContext } from '../contexts/AuthContext';
+import * as taskService from '../services/taskService'
 
 const TaskDetails = ({
   name,
@@ -16,18 +18,54 @@ const TaskDetails = ({
   onTaskClickHandler,
   onDeleteClickHandler
 }) => {
-  const [taskName, setName] = useState('');
-  const [taskDescr, setDescr] = useState('');
-
+  const { user } = useContext(AuthContext);
   const { taskId } = useParams();
-  // const ifOwner = userId === _ownerId;
-  // const ifUserWhoTakesTheTask = userId === takenByUser;
+  const navigate = useNavigate();
+  // const [taskName, setName] = useState('');
+  // const [taskDescr, setDescr] = useState('');
+  const [formValues, setFormValues] = useState({
+    name: '',
+    description: '',
+  })
+
+  const onChangeHandler = (e) => {
+    setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    console.log(e);
+    
+    // console.log(formValues);
+    // taskService.create(formValues)
+    //   .then(authData => {
+    //     if (authData.code === 403) {
+    //       navigate('/auth-error')
+    //     } else {
+    //       console.log(authData);
+    //       // userLoginHandler(authData);
+    //       navigate('/');
+    //     }
+    //   })
+    //   .catch(() => {
+    //     navigate('/404')
+    //   })
+  };
+
+ 
+  
+  // const ifOwner = user.email === owner;
   const ifOwner = true;
-  inProgress = true;
+
+  inProgress = false;
   isFinished = false;
 
   hoursOfWork = 5;
   takenByUser = 'george@abv.bg';
+
+
+
+
 
   if (!ifOwner && inProgress) {
     return (
@@ -51,16 +89,32 @@ const TaskDetails = ({
     );
   } else if (ifOwner) {
     return (
-      <form className="add-form">
+      <form className="add-form" onSubmit={onSubmit}>
         <div className="form-control">
           <label>Name of the Task</label>
           {(ifOwner && !inProgress) ?
-            (<input type="text" placeholder="Add Task" value={taskName} onChange={(e) => setName(e.target.value)} />)
-            : (<input type="text" placeholder="Add Task" disabled={true} value={taskName} />)}
+            (<input type="text" placeholder="Add Task"
+              name="name"
+              value={formValues.name}
+              onChange={onChangeHandler}
+            />)
+            : (<input type="text" placeholder="Add Task"
+              name="name"
+              disabled={true}
+              value={formValues.name}
+            />)}
           <label>Description of the Task</label>
           {(ifOwner && !inProgress) ?
-            (<input type="text" placeholder="Add Description" value={taskDescr} onChange={(e) => setDescr(e.target.value)} />)
-            : (<input type="text" placeholder="Add Description" disabled={true} value={taskDescr} />)}
+            (<input type="text" placeholder="Add Description"
+              name="description"
+              value={formValues.description}
+              onChange={onChangeHandler}
+            />)
+            : (<input type="text" placeholder="Add Description"
+              name="description"
+              disabled={true}
+              value={formValues.description}
+            />)}
         </div>
         {!inProgress && <input type="submit" className="btn" value="Take it" />}
         {(inProgress && ifOwner) && <input type="submit" className="btn" value="Finish" />}

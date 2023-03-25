@@ -23,6 +23,8 @@ const Task = ({
   //   setShowDeleteUser(userId)
   // }
 
+  // isFinished = true;
+
 
   return (
     <div className='task' onDoubleClick={() => onTaskClickHandler(_id)}>
