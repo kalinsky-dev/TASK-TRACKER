@@ -5,6 +5,7 @@ import { useParams, Link } from 'react-router-dom';
 const TaskDetails = ({
   name,
   description,
+  owner,
   inProgress,
   takenByUser,
   hoursOfWork,
@@ -22,31 +23,33 @@ const TaskDetails = ({
   // const ifOwner = userId === _ownerId;
   // const ifUserWhoTakesTheTask = userId === takenByUser;
   const ifOwner = true;
-  const UserWhoTakesTheTask = false;
-  inProgress = false;
+  inProgress = true;
   isFinished = false;
 
-  if (inProgress && !UserWhoTakesTheTask) {
+  hoursOfWork = 5;
+  takenByUser = 'george@abv.bg';
+
+  if (!ifOwner && inProgress) {
     return (
       <div className="form-control">
         <h2>This Task is in Progress!</h2>
         <Link to="/">Go Back</Link>
       </div>
     );
+  } else if (!ifOwner && !inProgress) {
+    return (
+      <div className="form-control">
+        <h2>You have no permission to edit this Task!</h2>
+        <Link to="/">Go Back</Link>
+      </div>
+    );
   } else if (isFinished) {
     return (
-      <form className="add-form">
-        <div className="form-control">
-          <h2>This Task is already Finished!</h2>
-          <label>Name of the Task</label>
-          <input type="text" placeholder="Add Task" disabled={true} value={taskName} />
-          <label>Description of the Task</label>
-          <input type="text" placeholder="Add Description" disabled={true} value={taskDescr} />
-        </div>
-        <input type="submit" className="btn" value="Delete" style={{ backgroundColor: 'red' }} onClick={(e) => onDeleteClickHandler(taskId, e)} />
-      </form>
+      <div className="form-control">
+        <h2>This Task is already finished for {hoursOfWork} hours by {takenByUser}!</h2>
+      </div>
     );
-  } else {
+  } else if (ifOwner) {
     return (
       <form className="add-form">
         <div className="form-control">
@@ -60,7 +63,7 @@ const TaskDetails = ({
             : (<input type="text" placeholder="Add Description" disabled={true} value={taskDescr} />)}
         </div>
         {!inProgress && <input type="submit" className="btn" value="Take it" />}
-        {(inProgress && UserWhoTakesTheTask) && <input type="submit" className="btn" value="Finish" />}
+        {(inProgress && ifOwner) && <input type="submit" className="btn" value="Finish" />}
         {(ifOwner && !inProgress) && <input type="submit" className="btn" value="Edit" />}
         {(ifOwner && !inProgress) && <input type="submit" className="btn" value="Delete" style={{ backgroundColor: 'red' }} onClick={(e) => onDeleteClickHandler(taskId, e)} />}
       </form>
