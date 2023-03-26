@@ -1,19 +1,18 @@
 import { useState, useEffect, useContext } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import * as taskService from '../services/taskService'
 import { AuthContext } from '../contexts/AuthContext';
 import { TaskContext } from '../contexts/TaskContext';
 
 const TaskDetails = ({
-  onFinishHandler,
   onDeleteClickHandler,
 }) => {
   const [currentTask, setCurrentTask] = useState({});
   const { user } = useContext(AuthContext);
   const { editTaskHandler } = useContext(TaskContext);
   const { taskId } = useParams();
-  const navigate = useNavigate();
+
 
   useEffect(() => {
     taskService.getOne(taskId)
@@ -31,6 +30,7 @@ const TaskDetails = ({
   const [formValues, setFormValues] = useState({
     name: '',
     description: '',
+    hoursOfWork: 0
   })
 
   const onChangeHandler = (e) => {
@@ -114,6 +114,25 @@ const TaskDetails = ({
       })
   }
 
+  const onFinishHandler = (taskId, e) => {
+    e.preventDefault();
+
+    console.log('Finish it ', taskId);
+
+    let taskData = {
+      ...currentTask,
+      inProgress: false,
+      isFinished: true,
+      hoursOfWork: Number(formValues.hoursOfWork)
+    }
+
+    taskService.edit(taskId, taskData)
+      .then(result => {
+        // console.log(result);
+        editTaskHandler(taskId, taskData);
+      })
+  }
+
 
   const ifOwner = user.email === currentTask.owner;
   // console.log(user.email);
@@ -148,30 +167,46 @@ const TaskDetails = ({
     return (
       <form className="add-form" >
         <div className="form-control">
-          <label>Name of the Task</label>
-          {(ifOwner && !inProgress) ?
-            (<input type="text" placeholder="Add Task"
-              name="name"
-              value={formValues.name}
-              onChange={onChangeHandler}
-            />)
-            : (<input type="text" placeholder="Add Task"
-              name="name"
-              disabled={true}
-              value={formValues.name}
-            />)}
-          <label>Description of the Task</label>
-          {(ifOwner && !inProgress) ?
-            (<input type="text" placeholder="Add Description"
-              name="description"
-              value={formValues.description}
-              onChange={onChangeHandler}
-            />)
-            : (<input type="text" placeholder="Add Description"
-              name="description"
-              disabled={true}
-              value={formValues.description}
-            />)}
+          {(ifOwner && !inProgress) &&
+            (<>
+              <label>Name of the Task:</label>
+              <input type="text" placeholder="Add Task"
+                name="name"
+                value={formValues.name}
+                onChange={onChangeHandler}
+              />
+              <label>Description of the Task:</label>
+              <input type="text" placeholder="Add Description"
+                name="description"
+                value={formValues.description}
+                onChange={onChangeHandler}
+              />
+            </>)
+          }
+          {(ifOwner && inProgress) &&
+            (<>
+              <label>Name of the Task:</label>
+              <input type="text" placeholder="Add Task"
+                name="name"
+                value={formValues.name}
+                onChange={onChangeHandler}
+                disabled={true}
+              />
+              <label>Description of the Task:</label>
+              <input type="text" placeholder="Add Description"
+                name="description"
+                value={formValues.description}
+                onChange={onChangeHandler}
+                disabled={true}
+              />
+              <label>Working hours for the Task:</label>
+              <input type="text" placeholder="Add hours"
+                name="hoursOfWork"
+                value={formValues.hoursOfWork}
+                onChange={onChangeHandler}
+              />
+            </>)
+          }
         </div>
         {!inProgress && <input type="submit" className="btn" value="Take it" onClick={(e) => onTakeItHandler(taskId, e)} />}
         {(inProgress && ifOwner) && <input type="submit" className="btn" value="Finish" onClick={(e) => onFinishHandler(taskId, e)} />}
