@@ -126,12 +126,17 @@ function App() {
     navigate('/');
   };
 
+  const editTaskHandler = (taskId, taskData) => {
+    setTasks(state => state.map(x => x._id === taskId ? taskData : x));
+    navigate('/');
+  }
+
 
   return (
     <AuthContext.Provider value={{ user: auth, userLoginHandler, userLogoutHandler }}>
       <div className="container">
         <Header />
-        <TaskContext.Provider value={{ tasks, addTaskHandler }}>
+        <TaskContext.Provider value={{ tasks, addTaskHandler, editTaskHandler }}>
           <main>
             <Routes>
               <Route path='/' element={<Home

@@ -1,8 +1,9 @@
 import { useState, useEffect, useContext } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 
-import { AuthContext } from '../contexts/AuthContext';
 import * as taskService from '../services/taskService'
+import { AuthContext } from '../contexts/AuthContext';
+import { TaskContext } from '../contexts/TaskContext';
 
 const TaskDetails = ({
   onTakeItHandler,
@@ -11,6 +12,7 @@ const TaskDetails = ({
 }) => {
   const [currentTask, setCurrentTask] = useState({});
   const { user } = useContext(AuthContext);
+  const { editTaskHandler } = useContext(TaskContext);
   const { taskId } = useParams();
   const navigate = useNavigate();
 
@@ -36,36 +38,70 @@ const TaskDetails = ({
     setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
   }
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    console.log(e);
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(e);
 
-    // console.log(formValues);
-    // taskService.create(formValues)
-    //   .then(authData => {
-    //     if (authData.code === 403) {
-    //       navigate('/auth-error')
-    //     } else {
-    //       console.log(authData);
-    //       userLoginHandler(authData);
-    //       navigate('/');
-    //     }
-    //   })
-    //   .catch(() => {
-    //     navigate('/404')
-    //   })
-  };
+  //   // console.log(formValues);
+  //   // taskService.create(formValues)
+  //   //   .then(authData => {
+  //   //     if (authData.code === 403) {
+  //   //       navigate('/auth-error')
+  //   //     } else {
+  //   //       console.log(authData);
+  //   //       userLoginHandler(authData);
+  //   //       navigate('/');
+  //   //     }
+  //   //   })
+  //   //   .catch(() => {
+  //   //     navigate('/404')
+  //   //   })
+  // };
+
+  // const onSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   console.log(formValues);
+
+  //   taskData.name = formValues.name;
+  //   taskData.description = formValues.description;
+  //   taskData.owner = user.email;
+
+  //   console.log(taskData);
 
 
+  //   taskService.create(taskData)
+  //     .then(result => {
+  //       console.log(result);
+  //       addTaskHandler(result);
+  //     })
+
+  //   addTaskHandler(formValues);
+  // }
 
   const onEditHandler = (taskId, e) => {
     e.preventDefault();
+
     console.log('Edit ', taskId);
-    // navigate(`/`);
-  };
+
+    let taskData = {
+      ...currentTask,
+      name: formValues.name,
+      description: formValues.description
+    }
+
+    taskService.edit(taskId, taskData)
+      .then(result => {
+        // console.log(result);
+        editTaskHandler(taskId, taskData);
+      })
+  }
 
 
   const ifOwner = user.email === currentTask.owner;
+  // console.log(user.email);
+  // console.log(currentTask.owner);
+
   const inProgress = currentTask.inProgress;
   const isFinished = currentTask.isFinished;
   const hoursOfWork = currentTask.hoursOfWork;
@@ -93,7 +129,7 @@ const TaskDetails = ({
     );
   } else if (ifOwner) {
     return (
-      <form className="add-form" onSubmit={onSubmit}>
+      <form className="add-form" >
         <div className="form-control">
           <label>Name of the Task</label>
           {(ifOwner && !inProgress) ?

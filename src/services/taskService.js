@@ -6,5 +6,6 @@ export const getAll = () => request.get(baseUrl);
 
 export const getOne = (taskId) => request.get(`${baseUrl}/${taskId}`)
 
-export const create = (gameData) => request.post(baseUrl, gameData);
+export const create = (taskData) => request.post(baseUrl, taskData);
 
+export const edit = (taskId, taskData) => request.put(`${baseUrl}/${taskId}`, taskData);
