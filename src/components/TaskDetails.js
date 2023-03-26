@@ -5,7 +5,6 @@ import { AuthContext } from '../contexts/AuthContext';
 import * as taskService from '../services/taskService'
 
 const TaskDetails = ({
-  onEditHandler,
   onTakeItHandler,
   onFinishHandler,
   onDeleteClickHandler,
@@ -14,6 +13,18 @@ const TaskDetails = ({
   const { user } = useContext(AuthContext);
   const { taskId } = useParams();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    taskService.getOne(taskId)
+      .then(taskData => {
+        // console.log(taskData);
+        setCurrentTask(taskData)
+        if (taskData) {
+          // console.log(taskData)
+          setFormValues(state => ({ ...state, name: taskData.name, description: taskData.description }))
+        }
+      })
+  }, [])
 
 
   const [formValues, setFormValues] = useState({
@@ -45,17 +56,13 @@ const TaskDetails = ({
     //   })
   };
 
-  useEffect(() => {
-    taskService.getOne(taskId)
-      .then(taskData => {
-        // console.log(taskData);
-        setCurrentTask(taskData)
-        if (taskData) {
-          // console.log(taskData)
-          setFormValues(state => ({ ...state, name: taskData.name, description: taskData.description }))
-        }
-      })
-  }, [])
+
+
+  const onEditHandler = (taskId, e) => {
+    e.preventDefault();
+    console.log('Edit ', taskId);
+    // navigate(`/`);
+  };
 
 
   const ifOwner = user.email === currentTask.owner;
@@ -113,7 +120,7 @@ const TaskDetails = ({
               value={formValues.description}
             />)}
         </div>
-        {!inProgress && <input type="submit" className="btn" value="Take it" onClick={(e) => onTakeItHandler(taskId, e)}/>}
+        {!inProgress && <input type="submit" className="btn" value="Take it" onClick={(e) => onTakeItHandler(taskId, e)} />}
         {(inProgress && ifOwner) && <input type="submit" className="btn" value="Finish" onClick={(e) => onFinishHandler(taskId, e)} />}
         {(ifOwner && !inProgress) && <input type="submit" className="btn" value="Edit" onClick={(e) => onEditHandler(taskId, e)} />}
         {(ifOwner && !inProgress) && <input type="submit" className="btn" value="Delete" style={{ backgroundColor: 'red' }} onClick={(e) => onDeleteClickHandler(taskId, e)} />}

@@ -25,6 +25,24 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [auth, setAuth] = useLocalStorage('auth', {});
   const navigate = useNavigate();
+
+  useEffect(() => {
+    taskService.getAll()
+      .then(
+        result => {
+          // console.log(auth.email);
+          // console.log(typeof result.code);
+          if (auth.email === undefined) {
+            navigate('/register')
+          } else if (result.code === Number(404) && auth.email !== undefined) {
+            navigate('/create-task')
+          } else {
+            // console.log(result);
+            setTasks(result);
+          }
+        });
+  }, [auth.email]);
+
   // const [tasks, setTasks] = useState([
   //   {
   //     name: 'Bug_1',
@@ -75,21 +93,16 @@ function App() {
     navigate(`/${taskId}`);
   };
 
-  const onEditHandler = (taskId, e) => {
-    e.preventDefault();
-    console.log('Edit' + ' ' + taskId);
-    // navigate(`/`);
-  };
 
   const onTakeItHandler = (taskId, e) => {
     e.preventDefault();
-    console.log('TakeIt' + ' ' + taskId);
+    console.log('TakeIt ', taskId);
     // navigate(`/`);
   };
 
   const onFinishHandler = (taskId, e) => {
     e.preventDefault();
-    console.log('Finish' + ' ' + taskId);
+    console.log('Finish ', taskId);
     // navigate(`/`);
   };
 
@@ -113,22 +126,6 @@ function App() {
     navigate('/');
   };
 
-  useEffect(() => {
-    taskService.getAll()
-      .then(
-        result => {
-          // console.log(auth.email);
-          // console.log(typeof result.code);
-          if (auth.email === undefined) {
-            navigate('/register')
-          } else if (result.code === Number(404) && auth.email !== undefined) {
-            navigate('/create-task')
-          } else {
-            // console.log(result);
-            setTasks(result);
-          }
-        });
-  }, [auth.email]);
 
   return (
     <AuthContext.Provider value={{ user: auth, userLoginHandler, userLogoutHandler }}>
@@ -148,7 +145,6 @@ function App() {
               <Route path='/create-task' element={<AddTask />}></Route>
               <Route path='/:taskId' element={<TaskDetails
                 tasks={tasks}
-                onEditHandler={onEditHandler}
                 onTakeItHandler={onTakeItHandler}
                 onFinishHandler={onFinishHandler}
                 onDeleteClickHandler={onDeleteClickHandler} />}>
