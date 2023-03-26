@@ -6,7 +6,6 @@ import { AuthContext } from '../contexts/AuthContext';
 import { TaskContext } from '../contexts/TaskContext';
 
 const TaskDetails = ({
-  onTakeItHandler,
   onFinishHandler,
   onDeleteClickHandler,
 }) => {
@@ -88,6 +87,24 @@ const TaskDetails = ({
       ...currentTask,
       name: formValues.name,
       description: formValues.description
+    }
+
+    taskService.edit(taskId, taskData)
+      .then(result => {
+        // console.log(result);
+        editTaskHandler(taskId, taskData);
+      })
+  }
+
+  const onTakeItHandler = (taskId, e) => {
+    e.preventDefault();
+
+    console.log('Take it ', taskId);
+
+    let taskData = {
+      ...currentTask,
+      inProgress: true,
+      takenByUser: user.email
     }
 
     taskService.edit(taskId, taskData)
