@@ -147,20 +147,21 @@ const TaskDetails = ({
     return (
       <div className="form-control">
         <h2>This Task is in Progress!</h2>
-        <Link to="/">Go Back</Link>
+        <Link to="/tasks">Go Back</Link>
       </div>
     );
   } else if (!ifOwner && !inProgress) {
     return (
       <div className="form-control">
         <h2>You have no permission to edit this Task!</h2>
-        <Link to="/">Go Back</Link>
+        <Link to="/tasks">Go Back</Link>
       </div>
     );
   } else if (isFinished) {
     return (
       <div className="form-control">
         <h2>This Task is already finished for {hoursOfWork} hours by {takenByUser}!</h2>
+        <input type="submit" className="btn" value="Delete" style={{ backgroundColor: 'red' }} onClick={(e) => onDeleteClickHandler(taskId, e)} />
       </div>
     );
   } else if (ifOwner) {
