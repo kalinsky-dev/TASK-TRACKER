@@ -24,7 +24,7 @@ const TaskDetails = ({
           setFormValues(state => ({ ...state, name: taskData.name, description: taskData.description }))
         }
       })
-  }, [])
+  }, [taskId])
 
 
   const [formValues, setFormValues] = useState({
