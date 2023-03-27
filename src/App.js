@@ -113,12 +113,7 @@ function App() {
   //   // navigate(`/`);
   // };
 
-  const onDeleteHandler = (taskId, e) => {
-    e?.preventDefault();
-    console.log(taskId);
-    setTasks(tasks.filter((task) => task._id !== taskId));
-    navigate('/tasks');
-  };
+
 
   const onDeleteClickHandler = (taskId, e) => {
     e?.preventDefault();
@@ -138,12 +133,17 @@ function App() {
     navigate('/tasks');
   }
 
+  const deleteTaskHandler = (taskId) => {
+    setTasks(tasks.filter((task) => task._id !== taskId));
+    navigate('/tasks');
+  }
+
 
   return (
     <AuthContext.Provider value={{ user: auth, userLoginHandler, userLogoutHandler }}>
       <div className="container">
         <Header />
-        <TaskContext.Provider value={{ tasks, addTaskHandler, editTaskHandler }}>
+        <TaskContext.Provider value={{ tasks, addTaskHandler, editTaskHandler, deleteTaskHandler }}>
           <main>
             <Routes>
               <Route path='/' element={<Home />}></Route>
@@ -162,8 +162,7 @@ function App() {
                 // onFinishHandler={onFinishHandler}
                 onDeleteClickHandler={onDeleteClickHandler} />}>
               </Route>
-              <Route path='/tasks/:taskId/delete' element={<TaskDelete
-                onDeleteHandler={onDeleteHandler} />}>
+              <Route path='/tasks/:taskId/delete' element={<TaskDelete />}>
               </Route>
               <Route path='/auth-error' element={<AuthError />}></Route>
               <Route path='/404' element={<ServerError />}></Route>
