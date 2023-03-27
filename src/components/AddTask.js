@@ -48,6 +48,7 @@ const AddTask = () => {
       .then(result => {
         // console.log(result);
         addTaskHandler(result);
+        
       })
 
     // addTaskHandler(formValues);
