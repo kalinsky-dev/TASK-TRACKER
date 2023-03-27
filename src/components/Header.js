@@ -8,7 +8,7 @@ import Button from './Button'
 
 const Header = ({ title }) => {
   const { user } = useContext(AuthContext);
-  
+
   const location = useLocation();
 
   const onSortHandler = (e) => {
@@ -20,27 +20,28 @@ const Header = ({ title }) => {
       <header className='header'>
         <h1>{title}</h1>
         {user.email ?
-          <div>
-            <Link to="/">
-              <Button color='steelblue' text='Sort' onClickBtn={onSortHandler} />
-            </Link>
-            <Link to="/create-task">
-              <Button color='steelblue' text='Add' />
-            </Link>
-            <Link to="/logout">
-              <Button color='steelblue' text='Logout' />
-            </Link>
-          </div> :
-          <div>
-            {(location.pathname !== '/login' && location.pathname !== '/register') &&
+          ((location.pathname === '/tasks') &&
+            <div>
+              <Link to="/">
+                <Button color='steelblue' text='Sort' onClickBtn={onSortHandler} />
+              </Link>
+              <Link to="/create-task">
+                <Button color='steelblue' text='Add' />
+              </Link>
+              <Link to="/logout">
+                <Button color='steelblue' text='Logout' />
+              </Link>
+            </div>) :
+          ((location.pathname !== '/login' && location.pathname !== '/register') &&
+            <div>
               < Link to="/login">
                 <Button color='steelblue' text='Login' />
-              </Link>}
-            {(location.pathname !== '/login' && location.pathname !== '/register') &&
+              </Link>
+
               <Link to="/register">
                 <Button color='steelblue' text='Register' />
-              </Link>}
-          </div>
+              </Link>
+            </div>)
         }
       </header >
       {user.email && <h4>Welcome: {user.email}</h4>}
