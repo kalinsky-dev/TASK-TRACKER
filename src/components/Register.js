@@ -32,7 +32,7 @@ const Register = () => {
       .then(authData => {
         // console.log(authData);
         userLoginHandler(authData);
-        navigate('/');
+        navigate('/tasks');
       }
       )
       .catch(() => {

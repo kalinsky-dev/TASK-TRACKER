@@ -27,7 +27,7 @@ const Login = () => {
         } else {
           // console.log(authData);
           userLoginHandler(authData);
-          navigate('/');
+          navigate('/tasks');
         }
       })
       .catch(() => {
