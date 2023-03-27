@@ -12,7 +12,8 @@ import AddTask from './components/AddTask';
 import AuthError from './components/AuthError';
 import Footer from './components/Footer';
 import Header from "./components/Header";
-import Home from "./components/Home";
+import Tasks from "./components/Tasks";
+import Home from "./components/Home"
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Register from './components/Register';
@@ -32,16 +33,17 @@ function App() {
         result => {
           // console.log(auth.email);
           // console.log(typeof result.code);
-          if (auth.email === undefined) {
-            navigate('/register')
-          } else if (result.code === Number(404) && auth.email !== undefined) {
-            navigate('/create-task')
-          } else {
-            // console.log(result);
-            setTasks(result);
-          }
+          // if (auth.email === undefined) {
+          //   navigate('/')
+          // } else if (result.code === Number(404) && auth.email !== undefined) {
+          //   navigate('/create-task')
+          // } else {
+          // console.log(result);
+          setTasks(result);
+          // }
         });
-  }, [auth.email]);
+  }, []);
+
 
   // const [tasks, setTasks] = useState([
   //   {
@@ -139,7 +141,8 @@ function App() {
         <TaskContext.Provider value={{ tasks, addTaskHandler, editTaskHandler }}>
           <main>
             <Routes>
-              <Route path='/' element={<Home
+              <Route path='/' element={<Home />}></Route>
+              <Route path='/tasks' element={<Tasks
                 tasks={tasks}
                 onTaskClickHandler={onTaskClickHandler}
                 onDeleteClickHandler={onDeleteClickHandler} />}>

@@ -8,6 +8,7 @@ import Button from './Button'
 
 const Header = ({ title }) => {
   const { user } = useContext(AuthContext);
+  
   const location = useLocation();
 
   const onSortHandler = (e) => {
