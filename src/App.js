@@ -12,8 +12,8 @@ import AddTask from './components/AddTask';
 import AuthError from './components/AuthError';
 import Footer from './components/Footer';
 import Header from "./components/Header";
-import Tasks from "./components/Tasks";
 import Home from "./components/Home"
+import Tasks from "./components/Tasks";
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Register from './components/Register';
@@ -39,7 +39,12 @@ function App() {
           //   navigate('/create-task')
           // } else {
           // console.log(result);
-          setTasks(result);
+          // console.log(result);
+          // console.log(result.code);
+
+          if (result.code !== Number(404)) {
+            setTasks(result);
+          }
           // }
         });
   }, []);
@@ -92,7 +97,7 @@ function App() {
 
   const onTaskClickHandler = (taskId) => {
     console.log(taskId);
-    navigate(`/${taskId}`);
+    navigate(`/tasks/${taskId}`);
   };
 
 
@@ -112,7 +117,7 @@ function App() {
     e?.preventDefault();
     console.log(taskId);
     setTasks(tasks.filter((task) => task._id !== taskId));
-    navigate('/');
+    navigate('/tasks');
   };
 
   const onDeleteClickHandler = (taskId, e) => {
@@ -125,12 +130,12 @@ function App() {
 
   const addTaskHandler = (taskData) => {
     setTasks(state => [...state, taskData]);
-    navigate('/');
+    navigate('/tasks');
   };
 
   const editTaskHandler = (taskId, taskData) => {
     setTasks(state => state.map(x => x._id === taskId ? taskData : x));
-    navigate('/');
+    navigate('/tasks');
   }
 
 
@@ -151,13 +156,13 @@ function App() {
               <Route path='/register' element={<Register />}></Route>
               <Route path='/logout' element={<Logout />}></Route>
               <Route path='/create-task' element={<AddTask />}></Route>
-              <Route path='/:taskId' element={<TaskDetails
+              <Route path='/tasks/:taskId' element={<TaskDetails
                 tasks={tasks}
                 // onTakeItHandler={onTakeItHandler}
                 // onFinishHandler={onFinishHandler}
                 onDeleteClickHandler={onDeleteClickHandler} />}>
               </Route>
-              <Route path='/:taskId/delete' element={<TaskDelete
+              <Route path='/tasks/:taskId/delete' element={<TaskDelete
                 onDeleteHandler={onDeleteHandler} />}>
               </Route>
               <Route path='/auth-error' element={<AuthError />}></Route>
