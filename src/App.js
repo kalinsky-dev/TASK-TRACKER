@@ -123,7 +123,7 @@ function App() {
   const onDeleteClickHandler = (taskId, e) => {
     e?.preventDefault();
     console.log(taskId);
-    navigate(`/${taskId}/delete`);
+    navigate(`/tasks/${taskId}/delete`);
   };
 
 

@@ -1,6 +1,9 @@
 import { FaTimes } from 'react-icons/fa';
-// import { useState } from 'react';
+import { useContext } from 'react'
 
+import * as taskService from '../services/taskService'
+import { AuthContext } from '../contexts/AuthContext';
+import { TaskContext } from '../contexts/TaskContext';
 
 const Task = ({
   name,
@@ -17,6 +20,8 @@ const Task = ({
   onDeleteClickHandler
 }) => {
 
+  const { user } = useContext(AuthContext);
+
   // const [showDeleteUser, setShowDeleteUser] = useState(null)
 
   // const onDeleteClick = (userId) => {
@@ -25,10 +30,11 @@ const Task = ({
 
   // isFinished = true;
 
+  const ifOwner = user.email === owner;
 
   return (
     <div className='task' onDoubleClick={() => onTaskClickHandler(_id)}>
-      {isFinished ? <h3>{name} <FaTimes style={{ color: 'red', cursor: 'pointer' }} onClick={() => onDeleteClickHandler(_id)} /> </h3> : <h3>{name}</h3>}
+      {(isFinished && ifOwner) ? <h3>{name} <FaTimes style={{ color: 'red', cursor: 'pointer' }} onClick={() => onDeleteClickHandler(_id)} /> </h3> : <h3>{name}</h3>}
       <h4>Description: {description}</h4>
       <p>Task is created by: {owner}</p>
       {takenByUser ? <p>Task is taken by: {takenByUser}</p> : <p>This task is not taken yet!</p>}
