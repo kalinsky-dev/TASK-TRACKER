@@ -27,13 +27,11 @@ const Header = ({ title }) => {
       };
       return a.hoursOfWork - b.hoursOfWork;
     });
+
     // Return different ref form the tasks array
     sortedData = sortedTasks.slice();
-
-    if (sortedData.length > 1) {
-      sortTaskHandler(sortedData);
-    }
-    console.log(sortedTasks);
+    sortTaskHandler(sortedData);
+    // console.log(sortedTasks);
   }
 
   return (
