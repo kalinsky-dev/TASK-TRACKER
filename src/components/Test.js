@@ -2,49 +2,15 @@
 
 // const Test = () => {
 //   return (
-//     <div className="form-control">
-//       {(ifOwner && !inProgress) &&
-//         (<>
-//           <label>Name of the Task:</label>
-//           <input type="text" placeholder="Add Task"
-//             name="name"
-//             value={formValues.name}
-//             onChange={onChangeHandler}
-//           />
-//           <label>Description of the Task:</label>
-//           <input type="text" placeholder="Add Description"
-//             name="description"
-//             value={formValues.description}
-//             onChange={onChangeHandler}
-//           />
-//         </>)
-//       }
-//       {(ifOwner && inProgress) &&
-//         (<>
-//           <label>Name of the Task:</label>
-//           <input type="text" placeholder="Add Task"
-//             name="name"
-//             value={formValues.name}
-//             onChange={onChangeHandler}
-//             disabled={true}
-//           />
-//           <label>Description of the Task:</label>
-//           <input type="text" placeholder="Add Description"
-//             name="description"
-//             value={formValues.description}
-//             onChange={onChangeHandler}
-//             disabled={true}
-//           />
-//           <label>Working hours for the Task:</label>
-//           <input type="text" placeholder="Add Description"
-//             name="hoursOfWork"
-//             value={formValues.hoursOfWork}
-//             onChange={onChangeHandler}
-//           />
-//         </>)
-//       }
-//     </div>
-//   )
+//     <>
+//       {tasks.map((task) => (
+//         <Task key={task._id} {...task}
+//           onTaskClickHandler={onTaskClickHandler}
+//           onDeleteClickHandler={onDeleteClickHandler}
+//         />
+//       ))}
+//     </>
+//   );
 // }
 
 // export default Test

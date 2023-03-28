@@ -138,12 +138,18 @@ function App() {
     navigate('/tasks');
   }
 
+  const sortTaskHandler = (sortedData) => {
+    setTasks(sortedData);
+    navigate('/tasks');
+  };
+
+
 
   return (
     <AuthContext.Provider value={{ user: auth, userLoginHandler, userLogoutHandler }}>
       <div className="container">
-        <Header />
-        <TaskContext.Provider value={{ tasks, addTaskHandler, editTaskHandler, deleteTaskHandler }}>
+        <TaskContext.Provider value={{ tasks, addTaskHandler, editTaskHandler, deleteTaskHandler, sortTaskHandler }}>
+          <Header />
           <main>
             <Routes>
               <Route path='/' element={<Home />}></Route>
