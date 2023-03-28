@@ -2,17 +2,38 @@ import PropTypes from 'prop-types'
 import { Link, useLocation } from 'react-router-dom'
 import { useContext } from 'react'
 
-import { AuthContext } from '../contexts/AuthContext'
+import { AuthContext } from '../contexts/AuthContext';
+import { TaskContext } from "../contexts/TaskContext";
 
 import Button from './Button'
 
 const Header = ({ title }) => {
   const { user } = useContext(AuthContext);
+  const { tasks, sortTaskHandler } = useContext(TaskContext);
 
   const location = useLocation();
 
-  const onSortHandler = (e) => {
-    console.log(e);
+  const onSortHandler = () => {
+
+    // console.log(tasks);
+    let sortedData = [];
+
+    let sortedTasks = tasks.sort((a, b) => {
+      if (a.hoursOfWork === Number(0)) {
+        return 1;
+      };
+      if (b.hoursOfWork === Number(0)) {
+        return -1;
+      };
+      return a.hoursOfWork - b.hoursOfWork;
+    });
+    // Return different ref form the tasks array
+    sortedData = sortedTasks.slice();
+
+    if (sortedData.length > 1) {
+      sortTaskHandler(sortedData);
+    }
+    console.log(sortedTasks);
   }
 
   return (
@@ -22,9 +43,9 @@ const Header = ({ title }) => {
         {user.email ?
           ((location.pathname === '/tasks') &&
             <div>
-              <Link to="/">
+              {(tasks.length > 1) &&
                 <Button color='steelblue' text='Sort' onClickBtn={onSortHandler} />
-              </Link>
+              }
               <Link to="/create-task">
                 <Button color='steelblue' text='Add' />
               </Link>
