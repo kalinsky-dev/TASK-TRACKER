@@ -10,9 +10,9 @@ Every Task includes dynamic Information for its:
 - Name
 - Description
 - Creator
-- Information if the Task is taken or still available 
-- Information for the person who has taken the Task, if it is in a progress
-- Information for the state if the Task is finished, person who resolved it and his working hours
+- Information, if the Task is taken or still available 
+- Information for the person, who has taken the Task, if it is in a progress
+- Information for the state, if the Task is finished, person who resolved it and his working hours
 
 
 Non-authenticated users are prompt to sign-in in the system. 
