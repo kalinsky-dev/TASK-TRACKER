@@ -1,6 +1,6 @@
 # Task Tracker
 
-This is an application like Kanban where you and your team can store and manage their Tasks.
+This is an application like Kanban, where you and your team can store and manage their Tasks.
 The board include all the Tasks which has to be resolved.
 
 ### Features
@@ -20,25 +20,24 @@ If there are no Tasks created, the user is ivited to craete its own.
 Once authenticated a user can Create, Read, Update, Take/Finish, Delete and Sort the Tasks:
 
  1. Create:
- -By means of an Add button, the user can Create his own Task, submitting its Name and Description.
+ - By means of an Add button, the user can Create his own Task, submitting its Name and Description.
  2. Read:
- -All created Tasks are listed in the Board.
+ - All created Tasks are listed in the Board.
  3. Update:
- -By double click of the Task in the board, the user can update it (change its Name or Description), 
+ - By double click of the Task in the board, the user can update it (change its Name or Description), 
  but only if it is the Creator and the Task is not in a progress. The Task can also not be updated, if it is Finished.
  4. Take:
- -By double click of the Task in the board, the user can Take it, but only if it is still available(not in Progress)
+ - By double click of the Task in the board, the user can Take it, but only if it is still available(not in Progress)
  5. Finish:
- -The user who has taken the Task can Finish it by dobule click on the Task in the board, submitting his working hours.
+ - The user who has taken the Task can Finish it by dobule click on the Task in the board, submitting his working hours.
  If the Task is clicked by person who has not taken it directly, a message is shown that the Task is in a Progress.
  6. Delete:
--only the creator of the Task can Delete it, but only if it is not in Pogress .
--if the Task is in Progress it can not be deleted by anyone.
--When the Task is finished an X icon on the right top corner is shown and the user can  Delete it from there.
+- only the creator of the Task can Delete it, but only if it is not in Pogress .
+- if the Task is in Progress it can not be deleted by anyone.
+- When the Task is finished an X icon on the right top corner is shown and the user can  Delete it from there.
 The Task can be deleted also by double click.
  7. Sort:
- -if Tasks are more than one, a Sort button is shown and everybody can Sort all Tasks in the board by their working hours 
- in ascending order. Tasks, which are still not taken are arranged on the bottom of the board.
+ - if Tasks are more than one, a Sort button is shown and everybody can Sort all Tasks in the board by their working hours in ascending order. Tasks, which are still not taken are arranged on the bottom of the board.
 
 
 ### Used technologies
