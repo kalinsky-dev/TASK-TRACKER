@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 const AuthError = () => {
   return (
     <div>
-      <h4>Your email or password is wrong...</h4>
+      <h4>Some of the fields are with incorrect or incomplete data.</h4>
       <h4>Please try again!</h4>
-      <Link to="/">Go Back</Link>
+      <Link to="/register">Go Back</Link>
     </div>
   );
 };
