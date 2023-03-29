@@ -82,7 +82,7 @@ function App() {
   //     isFinished: false,
   //     _createdOn: '03.01.2022',
   //     _id: '3',
-  //     _ownerId: 'Ivancho'
+  //     _ownerId: 'Ivan'
   //   },
   // ]);
 
