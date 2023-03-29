@@ -1,6 +1,6 @@
 # Task Tracker
 
-This is an application like Kanban, where you and your team can store and manage their Tasks.
+This is an application like Kanban, where you and your team can store and manage your Tasks.
 The board include all the Tasks which has to be resolved.
 
 ### Features
