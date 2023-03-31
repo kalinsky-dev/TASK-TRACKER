@@ -8,11 +8,36 @@ import { TaskContext } from '../contexts/TaskContext';
 const TaskDetails = ({
   onDeleteClickHandler,
 }) => {
-  const [currentTask, setCurrentTask] = useState({});
   const { user } = useContext(AuthContext);
   const { editTaskHandler } = useContext(TaskContext);
   const { taskId } = useParams();
 
+  const [currentTask, setCurrentTask] = useState({});
+
+  const [formValues, setFormValues] = useState({
+    name: '',
+    description: '',
+    hoursOfWork: '',
+  });
+
+  const [error, setError] = useState({
+    name: '',
+    description: '',
+    hoursOfWork: '',
+  });
+
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    if (
+      formValues.name &&
+      formValues.description &&
+      !error.name &&
+      !error.description
+    ) {
+      setIsFormValid(true);
+    } else setIsFormValid(false);
+  }, [formValues, error]);
 
   useEffect(() => {
     taskService.getOne(taskId)
@@ -26,80 +51,90 @@ const TaskDetails = ({
       })
   }, [taskId])
 
-
-  const [formValues, setFormValues] = useState({
-    name: '',
-    description: '',
-    hoursOfWork: 0
-  })
-
   const onChangeHandler = (e) => {
     setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
-  }
+  };
 
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(e);
+  const validateName = (e) => {
+    const name = e.target.value;
+    let errorMessage = '';
+    // console.log(name);
+    if (name.length === 0) {
+      errorMessage = 'Please write a name of the Task.';
+    }
+    setError(state => ({
+      ...state,
+      name: errorMessage,
+    }));
+  };
 
-  //   // console.log(formValues);
-  //   // taskService.create(formValues)
-  //   //   .then(authData => {
-  //   //     if (authData.code === 403) {
-  //   //       navigate('/auth-error')
-  //   //     } else {
-  //   //       console.log(authData);
-  //   //       userLoginHandler(authData);
-  //   //       navigate('/');
-  //   //     }
-  //   //   })
-  //   //   .catch(() => {
-  //   //     navigate('/404')
-  //   //   })
-  // };
+  const validateDescription = (e) => {
+    const description = e.target.value;
+    let errorMessage = '';
+    // console.log(description);
+    if (description.length === 0) {
+      errorMessage = 'Please write a description of the Task.';
+    }
+    setError(state => ({
+      ...state,
+      description: errorMessage,
+    }));
+  };
 
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
+  const validateHoursOfWork = (e) => {
+    const hoursOfWork = e.target.value;
+    let errorMessage = '';
+    // console.log(hoursOfWork);
+    if (isNaN(hoursOfWork) || hoursOfWork <= 0) {
+      errorMessage = 'Please write valid working hours.';
+    }
+    setError(state => ({
+      ...state,
+      hoursOfWork: errorMessage,
+    }));
+  };
 
-  //   console.log(formValues);
-
-  //   taskData.name = formValues.name;
-  //   taskData.description = formValues.description;
-  //   taskData.owner = user.email;
-
-  //   console.log(taskData);
-
-
-  //   taskService.create(taskData)
-  //     .then(result => {
-  //       console.log(result);
-  //       addTaskHandler(result);
-  //     })
-
-  //   addTaskHandler(formValues);
-  // }
 
   const onEditHandler = (taskId, e) => {
     e.preventDefault();
+    // console.log('Edit ', taskId);
 
-    console.log('Edit ', taskId);
+    if (isFormValid) {
+      console.log('hi');
 
-    let taskData = {
-      ...currentTask,
-      name: formValues.name,
-      description: formValues.description
-    }
+      let taskData = {
+        ...currentTask,
+        name: formValues.name,
+        description: formValues.description
+      };
 
-    taskService.edit(taskId, taskData)
-      .then(result => {
-        // console.log(result);
-        editTaskHandler(taskId, taskData);
-      })
-  }
+      taskService.edit(taskId, taskData)
+        .then(result => {
+          // console.log(result);
+          editTaskHandler(taskId, taskData);
+        });
+    } else {
+      if (formValues.name === '') {
+        const errorMessage = 'Please write a description of the Task.';
+        setError(state => ({
+          ...state,
+          name: errorMessage,
+        }));
+      };
+      if (formValues.description === '') {
+        const errorMessage = 'Please write a description of the Task.';
+        setError(state => ({
+          ...state,
+          description: errorMessage,
+        }));
+      };
+      return;
+    };
+  };
 
   const onTakeItHandler = (taskId, e) => {
     e.preventDefault();
-
-    console.log('Take it ', taskId);
+    // console.log('Take it ', taskId);
 
     let taskData = {
       ...currentTask,
@@ -116,21 +151,30 @@ const TaskDetails = ({
 
   const onFinishHandler = (taskId, e) => {
     e.preventDefault();
+    // console.log('Finish it ', taskId);
 
-    console.log('Finish it ', taskId);
+    if (!isNaN(formValues.hoursOfWork) && formValues.hoursOfWork > 0) {
 
-    let taskData = {
-      ...currentTask,
-      inProgress: false,
-      isFinished: true,
-      hoursOfWork: Number(formValues.hoursOfWork)
+      let taskData = {
+        ...currentTask,
+        inProgress: false,
+        isFinished: true,
+        hoursOfWork: Number(formValues.hoursOfWork)
+      }
+
+      taskService.edit(taskId, taskData)
+        .then(result => {
+          // console.log(result);
+          editTaskHandler(taskId, taskData);
+        })
+    } else {
+      const errorMessage = 'Please write valid working hours.';
+      setError(state => ({
+        ...state,
+        hoursOfWork: errorMessage,
+      }));
+      return;
     }
-
-    taskService.edit(taskId, taskData)
-      .then(result => {
-        // console.log(result);
-        editTaskHandler(taskId, taskData);
-      })
   }
 
 
@@ -175,13 +219,21 @@ const TaskDetails = ({
                 name="name"
                 value={formValues.name}
                 onChange={onChangeHandler}
+                onBlur={validateName}
               />
+              {error.name &&
+                <div style={{ color: 'red' }}>{error.name}</div>
+              }
               <label>Description of the Task:</label>
               <input type="text" placeholder="Add Description"
                 name="description"
                 value={formValues.description}
                 onChange={onChangeHandler}
+                onBlur={validateDescription}
               />
+              {error.description &&
+                <div style={{ color: 'red' }}>{error.description}</div>
+              }
             </>)
           }
           {(ifOwner && inProgress) &&
@@ -205,7 +257,11 @@ const TaskDetails = ({
                 name="hoursOfWork"
                 value={formValues.hoursOfWork}
                 onChange={onChangeHandler}
+                onBlur={validateHoursOfWork}
               />
+              {(error.hoursOfWork && error.hoursOfWork !== Number(0)) &&
+                <div style={{ color: 'red' }}>{error.hoursOfWork}</div>
+              }
             </>)
           }
         </div>
