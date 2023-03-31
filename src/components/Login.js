@@ -39,7 +39,7 @@ const Login = () => {
   const validateEmail = (e) => {
     const email = e.target.value;
     let errorMessage = '';
-    console.log(email);
+    // console.log(email);
     if (email.length === 0) {
       errorMessage = 'Please write a valid email.'
     } else {
