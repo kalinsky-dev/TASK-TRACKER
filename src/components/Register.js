@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { AuthContext } from "../contexts/AuthContext";
@@ -20,6 +20,20 @@ const Register = () => {
     confirmPass: '',
   });
 
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    if (
+      formValues.email &&
+      formValues.password &&
+      formValues.confirmPass &&
+      !error.email &&
+      !error.password &&
+      !error.confirmPass
+    ) {
+      setIsFormValid(true);
+    } else setIsFormValid(false);
+  }, [setIsFormValid, formValues, error]);
 
 
   const onChangeHandler = (e) => {
@@ -34,9 +48,9 @@ const Register = () => {
     if (email.length === 0) {
       errorMessage = 'Please write a valid email.'
     } else {
-      let patternLiteral = /^[a-z]+@{1}[a-z]+\.{1}[a-z]{2,3}$/i;
-      let pass = patternLiteral.test(email);
-      if (!pass) {
+      const emailRegex = /^[a-z]+@{1}[a-z]+\.{1}[a-z]{2,3}$/i;
+      const isEmailValid = emailRegex.test(email);
+      if (!isEmailValid) {
         errorMessage = 'The email should be in the following format (mailboxname @ domainname.domainextension)';
       }
     }
@@ -68,15 +82,11 @@ const Register = () => {
   const validateConfirmPass = (e) => {
     const confirmPass = e.target.value;
     let errorMessage = '';
-    // console.log(confirmPass);
     if (confirmPass.length < 4) {
       errorMessage = 'Password must be longer than 4 characters!'
     } else if (confirmPass.length > 10) {
       errorMessage = 'Password must be shorter than 10 characters!'
     } else if (confirmPass !== formValues.password) {
-      // console.log(error);
-      // console.log(confirmPass !== error.password);
-
       errorMessage = 'Passwords must match!'
     }
 
@@ -89,24 +99,9 @@ const Register = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    // console.log(formValues);
-    let patternLiteral = /^[a-z]+@{1}[a-z]+\.{1}[a-z]{2,3}$/i;
-    let pass = patternLiteral.test(formValues.email);
-
-
-    if (formValues.password === ''
-      || formValues.confirmPass === ''
-      || formValues.password < 4
-      || formValues.password > 10
-      || formValues.password !== formValues.confirmPass
-      || pass === false
-
-    ) {
-      navigate('/auth-error')
-    } else {
+    if (isFormValid) {
       authService.register(formValues)
         .then(authData => {
-          // console.log(authData);
           userLoginHandler(authData);
           navigate('/tasks');
         }
@@ -114,6 +109,29 @@ const Register = () => {
         .catch(() => {
           navigate('/404')
         })
+    } else {
+      if (formValues.email === '') {
+        const errorMessage = 'Please write a valid email.';
+        setError(state => ({
+          ...state,
+          email: errorMessage,
+        }));
+      }
+      if (formValues.password === '') {
+        const errorMessage = 'Please write a valid password.';
+        setError(state => ({
+          ...state,
+          password: errorMessage,
+        }));
+      }
+      if (formValues.confirmPass === '') {
+        const errorMessage = 'Please write a valid password.';
+        setError(state => ({
+          ...state,
+          confirmPass: errorMessage,
+        }));
+      }
+      return;
     }
   };
 
@@ -130,7 +148,7 @@ const Register = () => {
           <div style={{ color: 'red' }}>{error.email}</div>
         }
         <label>Password:</label>
-        <input type="text" placeholder="Add Password" name="password"
+        <input type="password" placeholder="Add Password" name="password"
           value={formValues.password}
           onChange={onChangeHandler}
           onBlur={validatePass}
@@ -139,7 +157,7 @@ const Register = () => {
           <div style={{ color: 'red' }}>{error.password}</div>
         }
         <label>Confirm Password:</label>
-        <input type="text" placeholder="Confirm Password" name="confirmPass"
+        <input type="password" placeholder="Confirm Password" name="confirmPass"
           value={formValues.confirmPass}
           onChange={onChangeHandler}
           onBlur={validateConfirmPass}
