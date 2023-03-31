@@ -12,7 +12,7 @@ const Register = () => {
     email: '',
     password: '',
     confirmPass: '',
-  })
+  });
 
   const [error, setError] = useState({
     email: '',
@@ -38,8 +38,7 @@ const Register = () => {
 
   const onChangeHandler = (e) => {
     setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
-  }
-
+  };
 
   const validateEmail = (e) => {
     const email = e.target.value;
@@ -108,7 +107,7 @@ const Register = () => {
         )
         .catch(() => {
           navigate('/404')
-        })
+        });
     } else {
       if (formValues.email === '') {
         const errorMessage = 'Please write a valid email.';
@@ -116,21 +115,21 @@ const Register = () => {
           ...state,
           email: errorMessage,
         }));
-      }
+      };
       if (formValues.password === '') {
         const errorMessage = 'Please write a valid password.';
         setError(state => ({
           ...state,
           password: errorMessage,
         }));
-      }
+      };
       if (formValues.confirmPass === '') {
         const errorMessage = 'Please write a valid password.';
         setError(state => ({
           ...state,
           confirmPass: errorMessage,
         }));
-      }
+      };
       return;
     }
   };
