@@ -18,7 +18,8 @@ export const AuthProvider = ({
     <AuthContext.Provider value={{
       user: auth,
       userLoginHandler,
-      userLogoutHandler
+      userLogoutHandler,
+      isAuthenticated: Boolean(auth.accessToken)
     }}>
       {children}
     </AuthContext.Provider>

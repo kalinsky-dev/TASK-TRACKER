@@ -19,6 +19,7 @@ import Register from './components/Register';
 import ServerError from './components/ServerError';
 import TaskDelete from './components/TaskDelete';
 import TaskDetails from './components/TaskDetails';
+import PrivateGuard from './components/common/PrivateGuard';
 
 
 function App() {
@@ -94,14 +95,16 @@ function App() {
           <main>
             <Routes>
               <Route path='/' element={<Home />}></Route>
-              <Route path='/tasks' element={<Tasks />}></Route>
               <Route path='/login' element={<Login />}></Route>
               <Route path='/register' element={<Register />}></Route>
-              <Route path='/logout' element={<Logout />}></Route>
-              <Route path='/create-task' element={<AddTask />}></Route>
-              <Route path='/tasks/:taskId' element={<TaskDetails />}></Route>
-              <Route path='/tasks/:taskId/delete' element={<TaskDelete />}></Route>
-              <Route path='/auth-error' element={<AuthError />}></Route>
+              <Route element={<PrivateGuard />}>
+                <Route path='/tasks' element={<Tasks />}></Route>
+                <Route path='/logout' element={<Logout />}></Route>
+                <Route path='/create-task' element={<AddTask />}></Route>
+                <Route path='/tasks/:taskId' element={<TaskDetails />}></Route>
+                <Route path='/tasks/:taskId/delete' element={<TaskDelete />}></Route>
+                <Route path='/auth-error' element={<AuthError />}></Route>
+              </Route>
               <Route path='/404' element={<ServerError />}></Route>
               <Route path='/about' element={<About />}></Route>
             </Routes>
