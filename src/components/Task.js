@@ -1,9 +1,8 @@
 import { FaTimes } from 'react-icons/fa';
 import { useContext } from 'react'
 
-import * as taskService from '../services/taskService'
 import { AuthContext } from '../contexts/AuthContext';
-import { TaskContext } from '../contexts/TaskContext';
+import { TaskContext } from "../contexts/TaskContext";
 
 const Task = ({
   name,
@@ -13,22 +12,11 @@ const Task = ({
   takenByUser,
   hoursOfWork,
   isFinished,
-  _createdOn,
   _id,
-  _ownerId,
-  onTaskClickHandler,
-  onDeleteClickHandler
 }) => {
 
   const { user } = useContext(AuthContext);
-
-  // const [showDeleteUser, setShowDeleteUser] = useState(null)
-
-  // const onDeleteClick = (userId) => {
-  //   setShowDeleteUser(userId)
-  // }
-
-  // isFinished = true;
+  const { onTaskClickHandler, onDeleteClickHandler } = useContext(TaskContext);
 
   const ifOwner = user.email === owner;
 
@@ -40,7 +28,6 @@ const Task = ({
       {takenByUser ? <p>Task is taken by: {takenByUser}</p> : <p>This task is not taken yet!</p>}
       {inProgress && <p>Task is in progress!</p>}
       {isFinished && <p>Task is resolved for: {hoursOfWork} hours.</p>}
-      {/* {showDeleteUser && <UserDelete onClose={onClose} onDelete={onDeleteHandler} />} */}
     </div>
   );
 };
