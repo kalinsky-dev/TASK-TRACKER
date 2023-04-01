@@ -2,9 +2,8 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
-import { AuthContext } from './contexts/AuthContext';
+import { AuthProvider } from './contexts/AuthContext';
 import { TaskContext } from './contexts/TaskContext';
-import { useLocalStorage } from './hooks/useLocalStorage';
 import * as taskService from './services/taskService';
 
 import About from './components/About';
@@ -24,7 +23,7 @@ import TaskDetails from './components/TaskDetails';
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  const [auth, setAuth] = useLocalStorage('auth', {});
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,23 +48,13 @@ function App() {
         });
   }, []);
 
-  const userLoginHandler = (authData) => {
-    setAuth(authData)
-  }
-
-  const userLogoutHandler = (authData) => {
-    setAuth({})
-  }
-
   const onTaskClickHandler = (taskId) => {
-    // console.log(taskId);
     navigate(`/tasks/${taskId}`);
   };
 
 
   const onDeleteClickHandler = (taskId, e) => {
     e?.preventDefault();
-    // console.log(taskId);
     navigate(`/tasks/${taskId}/delete`);
   };
 
@@ -90,7 +79,7 @@ function App() {
   };
 
   return (
-    <AuthContext.Provider value={{ user: auth, userLoginHandler, userLogoutHandler }}>
+    <AuthProvider >
       <div className="container">
         <TaskContext.Provider value={{
           tasks,
@@ -110,10 +99,8 @@ function App() {
               <Route path='/register' element={<Register />}></Route>
               <Route path='/logout' element={<Logout />}></Route>
               <Route path='/create-task' element={<AddTask />}></Route>
-              <Route path='/tasks/:taskId' element={<TaskDetails />}>
-              </Route>
-              <Route path='/tasks/:taskId/delete' element={<TaskDelete />}>
-              </Route>
+              <Route path='/tasks/:taskId' element={<TaskDetails />}></Route>
+              <Route path='/tasks/:taskId/delete' element={<TaskDelete />}></Route>
               <Route path='/auth-error' element={<AuthError />}></Route>
               <Route path='/404' element={<ServerError />}></Route>
               <Route path='/about' element={<About />}></Route>
@@ -122,7 +109,7 @@ function App() {
         </TaskContext.Provider>
         <Footer />
       </div>
-    </AuthContext.Provider >
+    </AuthProvider >
   );
 };
 
