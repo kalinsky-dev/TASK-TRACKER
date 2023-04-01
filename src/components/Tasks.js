@@ -1,22 +1,19 @@
+import { useContext } from 'react'
+
+import { TaskContext } from "../contexts/TaskContext";
+
 import Task from "./Task";
 
 
-const Tasks = ({
-  tasks,
-  onTaskClickHandler,
-  onDeleteClickHandler
-}) => {
-
+const Tasks = () => {
+  const { tasks } = useContext(TaskContext)
   const hasTask = tasks.length > 0;
 
   if (hasTask) {
     return (
       <>
         {tasks.map((task) => (
-          <Task key={task._id} {...task}
-            onTaskClickHandler={onTaskClickHandler}
-            onDeleteClickHandler={onDeleteClickHandler}
-          />
+          <Task key={task._id} {...task} />
         ))}
       </>
     );
