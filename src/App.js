@@ -92,25 +92,25 @@ function App() {
   return (
     <AuthContext.Provider value={{ user: auth, userLoginHandler, userLogoutHandler }}>
       <div className="container">
-        <TaskContext.Provider value={{ tasks, addTaskHandler, editTaskHandler, deleteTaskHandler, sortTaskHandler }}>
+        <TaskContext.Provider value={{
+          tasks,
+          addTaskHandler,
+          editTaskHandler,
+          deleteTaskHandler,
+          sortTaskHandler,
+          onTaskClickHandler,
+          onDeleteClickHandler
+        }}>
           <Header />
           <main>
             <Routes>
               <Route path='/' element={<Home />}></Route>
-              <Route path='/tasks' element={<Tasks
-                tasks={tasks}
-                onTaskClickHandler={onTaskClickHandler}
-                onDeleteClickHandler={onDeleteClickHandler} />}>
-              </Route>
+              <Route path='/tasks' element={<Tasks />}></Route>
               <Route path='/login' element={<Login />}></Route>
               <Route path='/register' element={<Register />}></Route>
               <Route path='/logout' element={<Logout />}></Route>
               <Route path='/create-task' element={<AddTask />}></Route>
-              <Route path='/tasks/:taskId' element={<TaskDetails
-                tasks={tasks}
-                // onTakeItHandler={onTakeItHandler}
-                // onFinishHandler={onFinishHandler}
-                onDeleteClickHandler={onDeleteClickHandler} />}>
+              <Route path='/tasks/:taskId' element={<TaskDetails />}>
               </Route>
               <Route path='/tasks/:taskId/delete' element={<TaskDelete />}>
               </Route>
