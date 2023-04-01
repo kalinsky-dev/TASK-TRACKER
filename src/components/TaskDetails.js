@@ -5,11 +5,9 @@ import * as taskService from '../services/taskService'
 import { AuthContext } from '../contexts/AuthContext';
 import { TaskContext } from '../contexts/TaskContext';
 
-const TaskDetails = ({
-  onDeleteClickHandler,
-}) => {
+const TaskDetails = () => {
   const { user } = useContext(AuthContext);
-  const { editTaskHandler } = useContext(TaskContext);
+  const { editTaskHandler, onDeleteClickHandler } = useContext(TaskContext);
   const { taskId } = useParams();
 
   const [currentTask, setCurrentTask] = useState({});
