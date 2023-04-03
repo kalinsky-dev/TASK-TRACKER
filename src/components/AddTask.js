@@ -73,8 +73,7 @@ const AddTask = () => {
     e.preventDefault();
 
     if (isFormValid) {
-      console.log(isFormValid);
-
+    
       const taskData = {
         name: '',
         description: '',
