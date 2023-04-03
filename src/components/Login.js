@@ -59,7 +59,7 @@ const Login = () => {
   const validatePass = (e) => {
     const password = e.target.value;
     let errorMessage = '';
-    console.log(password);
+    // console.log(password);
     if (password.length === 0) {
       errorMessage = 'Please write a valid password.'
     } else if (password.length < 4) {

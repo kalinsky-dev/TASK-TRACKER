@@ -31,21 +31,9 @@ function App() {
     taskService.getAll()
       .then(
         result => {
-          // console.log(auth.email);
-          // console.log(typeof result.code);
-          // if (auth.email === undefined) {
-          //   navigate('/')
-          // } else if (result.code === Number(404) && auth.email !== undefined) {
-          //   navigate('/create-task')
-          // } else {
-          // console.log(result);
-          // console.log(result);
-          // console.log(result.code);
-
           if (result.code !== Number(404)) {
             setTasks(result);
           }
-          // }
         });
   }, []);
 
