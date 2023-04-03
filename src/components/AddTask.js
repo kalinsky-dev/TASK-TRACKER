@@ -16,10 +16,15 @@ const AddTask = () => {
     description: '',
   })
 
-  const [error, setError] = useState({
+  const [formError, setFormError] = useState({
     name: '',
     description: '',
   });
+
+  const [serverError, setServerError] = useState({
+    message: '',
+  })
+
 
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -27,12 +32,12 @@ const AddTask = () => {
     if (
       formValues.name &&
       formValues.description &&
-      !error.name &&
-      !error.description
+      !formError.name &&
+      !formError.description
     ) {
       setIsFormValid(true);
     } else setIsFormValid(false);
-  }, [setIsFormValid, formValues, error]);
+  }, [formValues, formError]);
 
 
   const onChangeHandler = (e) => {
@@ -43,11 +48,10 @@ const AddTask = () => {
   const validateName = (e) => {
     const name = e.target.value;
     let errorMessage = '';
-    // console.log(name);
     if (name.length === 0) {
       errorMessage = 'Please write a valid name.'
     }
-    setError(state => ({
+    setFormError(state => ({
       ...state,
       name: errorMessage,
     }));
@@ -56,11 +60,10 @@ const AddTask = () => {
   const validateDescription = (e) => {
     const description = e.target.value;
     let errorMessage = '';
-    // console.log(description);
     if (description.length === 0) {
       errorMessage = 'Please write a valid description.'
     }
-    setError(state => ({
+    setFormError(state => ({
       ...state,
       description: errorMessage,
     }));
@@ -88,17 +91,20 @@ const AddTask = () => {
         .then(result => {
           addTaskHandler(result);
         })
+        .catch((error) => {
+          setServerError(state => ({ ...state, message: error.message }));
+        });
     } else {
       if (formValues.name === '') {
         const errorMessage = 'Please write a valid name.';
-        setError(state => ({
+        setFormError(state => ({
           ...state,
           name: errorMessage,
         }));
       };
       if (formValues.description === '') {
         const errorMessage = 'Please write a valid description.';
-        setError(state => ({
+        setFormError(state => ({
           ...state,
           description: errorMessage,
         }));
@@ -116,8 +122,8 @@ const AddTask = () => {
           onChange={onChangeHandler}
           onBlur={validateName}
         />
-        {error.name &&
-          <div style={{ color: 'red' }}>{error.name}</div>
+        {formError.name &&
+          <div style={{ color: 'red' }}>{formError.name}</div>
         }
         <label>Description of the Task</label>
         <input type="text" placeholder="Add Description" name="description"
@@ -125,8 +131,11 @@ const AddTask = () => {
           onChange={onChangeHandler}
           onBlur={validateDescription}
         />
-        {error.description &&
-          <div style={{ color: 'red' }}>{error.description}</div>
+        {formError.description &&
+          <div style={{ color: 'red' }}>{formError.description}</div>
+        }
+        {serverError.message &&
+          <div style={{ color: 'red' }}>{serverError.message}</div>
         }
       </div>
       <input type="submit" className="btn btn-block" value="Save Task" />
