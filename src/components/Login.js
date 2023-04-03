@@ -14,10 +14,14 @@ const Login = () => {
     password: '',
   });
 
-  const [error, setError] = useState({
+  const [formError, setError] = useState({
     email: '',
     password: '',
   });
+
+  const [serverError, setServerError] = useState({
+    message: '',
+  })
 
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -25,12 +29,12 @@ const Login = () => {
     if (
       formValues.email &&
       formValues.password &&
-      !error.email &&
-      !error.password
+      !formError.email &&
+      !formError.password
     ) {
       setIsFormValid(true);
     } else setIsFormValid(false);
-  }, [setIsFormValid, formValues, error]);
+  }, [formValues, formError]);
 
   const onChangeHandler = (e) => {
     setFormValues(state => ({ ...state, [e.target.name]: e.target.value }))
@@ -39,7 +43,6 @@ const Login = () => {
   const validateEmail = (e) => {
     const email = e.target.value;
     let errorMessage = '';
-    // console.log(email);
     if (email.length === 0) {
       errorMessage = 'Please write a valid email.'
     } else {
@@ -59,7 +62,6 @@ const Login = () => {
   const validatePass = (e) => {
     const password = e.target.value;
     let errorMessage = '';
-    // console.log(password);
     if (password.length === 0) {
       errorMessage = 'Please write a valid password.'
     } else if (password.length < 4) {
@@ -81,16 +83,12 @@ const Login = () => {
     if (isFormValid) {
       authService.login(formValues)
         .then(authData => {
-          if (authData.code === 403) {
-            navigate('/auth-error')
-          } else {
-            // console.log(authData);
-            userLoginHandler(authData);
-            navigate('/tasks');
-          }
+          userLoginHandler(authData);
+          navigate('/tasks');
         })
-        .catch(() => {
-          navigate('/404')
+        .catch((error) => {
+          console.log(error);
+          setServerError(state => ({ ...state, message: error.message }));
         });
     } else {
       if (formValues.email === '') {
@@ -121,8 +119,8 @@ const Login = () => {
           onChange={onChangeHandler}
           onBlur={validateEmail}
         />
-        {error.email &&
-          <div style={{ color: 'red' }}>{error.email}</div>
+        {formError.email &&
+          <div style={{ color: 'red' }}>{formError.email}</div>
         }
         <label>Password:</label>
         <input type="password" placeholder="Add Password" name="password"
@@ -130,8 +128,11 @@ const Login = () => {
           onChange={onChangeHandler}
           onBlur={validatePass}
         />
-        {error.password &&
-          <div style={{ color: 'red' }}>{error.password}</div>
+        {formError.password &&
+          <div style={{ color: 'red' }}>{formError.password}</div>
+        }
+        {serverError.message &&
+          <div style={{ color: 'red' }}>{serverError.message}</div>
         }
       </div>
       <input type="submit" className="btn" value="Log In" />
