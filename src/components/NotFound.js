@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 const NotFound = () => {
   return (
     <div>
-      <h4>Oooops... Something went wrong....</h4>
-      <h4>Sit back, relax and try again later</h4>
-      <h4>:)</h4>
+      <h3>Oooops... Something went wrong....</h3>
+      <h3>Sit back, relax and try again later</h3>
+      <h3>:)</h3>
       <Link to="/">Go Back</Link>
     </div>
   );
