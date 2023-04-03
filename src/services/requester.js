@@ -36,6 +36,7 @@ const request = async (method, url, data) => {
       throw new Error(error.message)
     } else {
       const result = await response.json();
+      // console.log(result);
       return result;
     }
     // console.log(response);
