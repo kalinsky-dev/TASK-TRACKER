@@ -15,7 +15,6 @@ const Header = ({ title }) => {
 
   const onSortHandler = () => {
 
-    // console.log(tasks);
     let sortedData = [];
 
     let sortedTasks = tasks.sort((a, b) => {
@@ -31,7 +30,6 @@ const Header = ({ title }) => {
     // Return different ref form the tasks array
     sortedData = sortedTasks.slice();
     sortTaskHandler(sortedData);
-    // console.log(sortedTasks);
   }
 
   return (
