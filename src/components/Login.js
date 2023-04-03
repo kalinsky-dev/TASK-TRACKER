@@ -14,7 +14,7 @@ const Login = () => {
     password: '',
   });
 
-  const [formError, setError] = useState({
+  const [formError, setFormError] = useState({
     email: '',
     password: '',
   });
@@ -53,7 +53,7 @@ const Login = () => {
       }
     }
 
-    setError(state => ({
+    setFormError(state => ({
       ...state,
       email: errorMessage,
     }));
@@ -70,7 +70,7 @@ const Login = () => {
       errorMessage = 'Password must be shorter than 10 characters!'
     }
 
-    setError(state => ({
+    setFormError(state => ({
       ...state,
       password: errorMessage,
     }));
@@ -93,14 +93,14 @@ const Login = () => {
     } else {
       if (formValues.email === '') {
         const errorMessage = 'Please write a valid email.';
-        setError(state => ({
+        setFormError(state => ({
           ...state,
           email: errorMessage,
         }));
       };
       if (formValues.password === '') {
         const errorMessage = 'Please write a valid password.';
-        setError(state => ({
+        setFormError(state => ({
           ...state,
           password: errorMessage,
         }));

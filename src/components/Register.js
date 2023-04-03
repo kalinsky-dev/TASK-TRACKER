@@ -14,7 +14,7 @@ const Register = () => {
     confirmPass: '',
   });
 
-  const [formError, setError] = useState({
+  const [formError, setFormError] = useState({
     email: '',
     password: '',
     confirmPass: '',
@@ -57,7 +57,7 @@ const Register = () => {
       }
     }
 
-    setError(state => ({
+    setFormError(state => ({
       ...state,
       email: errorMessage,
     }));
@@ -74,7 +74,7 @@ const Register = () => {
       errorMessage = 'Password must be shorter than 10 characters!'
     }
 
-    setError(state => ({
+    setFormError(state => ({
       ...state,
       password: errorMessage,
     }));
@@ -91,7 +91,7 @@ const Register = () => {
       errorMessage = 'Passwords must match!'
     }
 
-    setError(state => ({
+    setFormError(state => ({
       ...state,
       confirmPass: errorMessage,
     }));
@@ -112,21 +112,21 @@ const Register = () => {
     } else {
       if (formValues.email === '') {
         const errorMessage = 'Please write a valid email.';
-        setError(state => ({
+        setFormError(state => ({
           ...state,
           email: errorMessage,
         }));
       };
       if (formValues.password === '') {
         const errorMessage = 'Please write a valid password.';
-        setError(state => ({
+        setFormError(state => ({
           ...state,
           password: errorMessage,
         }));
       };
       if (formValues.confirmPass === '') {
         const errorMessage = 'Please write a valid password.';
-        setError(state => ({
+        setFormError(state => ({
           ...state,
           confirmPass: errorMessage,
         }));
