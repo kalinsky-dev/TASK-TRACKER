@@ -8,7 +8,6 @@ import * as taskService from './services/taskService';
 
 import About from './components/About';
 import AddTask from './components/AddTask';
-import AuthError from './components/AuthError';
 import Footer from './components/Footer';
 import Header from "./components/Header";
 import Home from "./components/Home"
@@ -96,7 +95,6 @@ function App() {
                 <Route path='/create-task' element={<AddTask />}></Route>
                 <Route path='/tasks/:taskId' element={<TaskDetails />}></Route>
                 <Route path='/tasks/:taskId/delete' element={<TaskDelete />}></Route>
-                <Route path='/auth-error' element={<AuthError />}></Route>
               </Route>
               <Route path='/about' element={<About />}></Route>
               <Route path='*' element={<NotFound />}></Route>
