@@ -16,7 +16,7 @@ import Tasks from "./components/Tasks";
 import Login from './components/Login';
 import Logout from './components/Logout';
 import Register from './components/Register';
-import ServerError from './components/ServerError';
+import NotFound from './components/NotFound';
 import TaskDelete from './components/TaskDelete';
 import TaskDetails from './components/TaskDetails';
 import PrivateGuard from './components/common/PrivateGuard';
@@ -93,8 +93,8 @@ function App() {
                 <Route path='/tasks/:taskId/delete' element={<TaskDelete />}></Route>
                 <Route path='/auth-error' element={<AuthError />}></Route>
               </Route>
-              <Route path='/404' element={<ServerError />}></Route>
               <Route path='/about' element={<About />}></Route>
+              <Route path='*' element={<NotFound />}></Route>
             </Routes>
           </main>
         </TaskContext.Provider>
