@@ -14,11 +14,15 @@ const Register = () => {
     confirmPass: '',
   });
 
-  const [error, setError] = useState({
+  const [formError, setError] = useState({
     email: '',
     password: '',
     confirmPass: '',
   });
+
+  const [serverError, setServerError] = useState({
+    message: '',
+  })
 
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -27,13 +31,13 @@ const Register = () => {
       formValues.email &&
       formValues.password &&
       formValues.confirmPass &&
-      !error.email &&
-      !error.password &&
-      !error.confirmPass
+      !formError.email &&
+      !formError.password &&
+      !formError.confirmPass
     ) {
       setIsFormValid(true);
     } else setIsFormValid(false);
-  }, [setIsFormValid, formValues, error]);
+  }, [formValues, formError]);
 
 
   const onChangeHandler = (e) => {
@@ -43,7 +47,6 @@ const Register = () => {
   const validateEmail = (e) => {
     const email = e.target.value;
     let errorMessage = '';
-    // console.log(email);
     if (email.length === 0) {
       errorMessage = 'Please write a valid email.'
     } else {
@@ -63,7 +66,6 @@ const Register = () => {
   const validatePass = (e) => {
     const password = e.target.value;
     let errorMessage = '';
-    // console.log(password);
     if (password.length === 0) {
       errorMessage = 'Please write a valid password.'
     } else if (password.length < 4) {
@@ -103,10 +105,9 @@ const Register = () => {
         .then(authData => {
           userLoginHandler(authData);
           navigate('/tasks');
-        }
-        )
-        .catch(() => {
-          navigate('/404')
+        })
+        .catch((error) => {
+          setServerError(state => ({ ...state, message: error.message }));
         });
     } else {
       if (formValues.email === '') {
@@ -136,7 +137,7 @@ const Register = () => {
 
   return (
     <form className="add-form" onSubmit={onSubmit}>
-        <h2>Please Register in the System.</h2>
+      <h2>Please Register in the System.</h2>
       <div className="form-control">
         <label>Email:</label>
         <input type="text" placeholder="Add Email" name="email"
@@ -144,8 +145,8 @@ const Register = () => {
           onChange={onChangeHandler}
           onBlur={validateEmail}
         />
-        {error.email &&
-          <div style={{ color: 'red' }}>{error.email}</div>
+        {formError.email &&
+          <div style={{ color: 'red' }}>{formError.email}</div>
         }
         <label>Password:</label>
         <input type="password" placeholder="Add Password" name="password"
@@ -153,8 +154,8 @@ const Register = () => {
           onChange={onChangeHandler}
           onBlur={validatePass}
         />
-        {error.password &&
-          <div style={{ color: 'red' }}>{error.password}</div>
+        {formError.password &&
+          <div style={{ color: 'red' }}>{formError.password}</div>
         }
         <label>Confirm Password:</label>
         <input type="password" placeholder="Confirm Password" name="confirmPass"
@@ -162,8 +163,11 @@ const Register = () => {
           onChange={onChangeHandler}
           onBlur={validateConfirmPass}
         />
-        {error.confirmPass &&
-          <div style={{ color: 'red' }}>{error.confirmPass}</div>
+        {formError.confirmPass &&
+          <div style={{ color: 'red' }}>{formError.confirmPass}</div>
+        }
+        {serverError.message &&
+          <div style={{ color: 'red' }}>{serverError.message}</div>
         }
       </div>
       <input type="submit" className="btn" value="Register" />
