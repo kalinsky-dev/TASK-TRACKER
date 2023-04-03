@@ -41,20 +41,7 @@ function App() {
           return;
         }
       });
-  }, [tasks]);
-
-  // if (tasks.length !== 0) {
-  //   taskService.getAll()
-  //     .then(
-  //       result => {
-  //         setTasks(result)
-  //       })
-  //     .catch((error) => {
-
-  //       navigate('/tasks')
-  //       return;
-  //     });
-  // }
+  }, []);
 
   const onTaskClickHandler = (taskId) => {
     navigate(`/tasks/${taskId}`);
