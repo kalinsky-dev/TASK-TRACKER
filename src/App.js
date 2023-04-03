@@ -33,9 +33,6 @@ function App() {
           setTasks(result)
         })
       .catch((error) => {
-        // console.log(error.message);
-        // navigate('/')
-        // console.log(error);
         if (error.code === '404') {
           return;
         }
