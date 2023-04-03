@@ -31,16 +31,34 @@ function App() {
     taskService.getAll()
       .then(
         result => {
-          if (result.code !== Number(404)) {
-            setTasks(result);
-          }
-        });
-  }, []);
+          setTasks(result)
+        })
+      .catch((error) => {
+        // console.log(error.message);
+        // navigate('/')
+        // console.log(error);
+        if (error.code === '404') {
+          return;
+        }
+      });
+  }, [tasks]);
+
+  // if (tasks.length !== 0) {
+  //   taskService.getAll()
+  //     .then(
+  //       result => {
+  //         setTasks(result)
+  //       })
+  //     .catch((error) => {
+
+  //       navigate('/tasks')
+  //       return;
+  //     });
+  // }
 
   const onTaskClickHandler = (taskId) => {
     navigate(`/tasks/${taskId}`);
   };
-
 
   const onDeleteClickHandler = (taskId, e) => {
     e?.preventDefault();
