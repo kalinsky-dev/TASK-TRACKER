@@ -87,7 +87,6 @@ const Login = () => {
           navigate('/tasks');
         })
         .catch((error) => {
-          console.log(error);
           setServerError(state => ({ ...state, message: error.message }));
         });
     } else {
