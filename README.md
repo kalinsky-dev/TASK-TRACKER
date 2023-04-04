@@ -44,7 +44,7 @@ Once authenticated a user can Create, Read, Update, Take/Finish, Delete and Sort
 
 - Front-end built with React
 - Softuni-Pracite-Server for authentication and data storage
-- JEST, React Testing Library for Component Testing
+- JEST, React Testing Library for Component Unit Testing
 
 
 # Getting Started with Create React App
