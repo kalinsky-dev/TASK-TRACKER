@@ -9,11 +9,9 @@ import { TaskContext } from '../contexts/TaskContext';
 import Task from './Task';
 
 
-
-
 describe('Task', () => {
   afterEach(cleanup);
-  test('Should render the Task name', () => {
+  test('Should render the Task name', async () => {
     const tasks = [{
       name: 'Task1',
       description: 'This is a Task1',
@@ -24,6 +22,7 @@ describe('Task', () => {
       isFinished: false,
       _id: 'id',
     }]
+
     render(
       <BrowserRouter>
         <AuthContext.Provider value={{ user: { email: 'abv@abv.bg' }, isAuthenticated: true }}>
@@ -48,8 +47,12 @@ describe('Task', () => {
 
     // const element = screen.queryByText('This is a Task1')
     // expect(screen.getByText('Task1')).toContain('Task1');
-    expect(screen.getByText('Task1')).toBeInTheDocument();
+    // expect(screen.findByText('Task1')).toBeInTheDocument();
     // console.log(screen.getByText('Task1'));
+
+    const element = await screen.findByText(tasks[0].name);
+    expect(element).toBeInTheDocument();
+    
   });
 });
 
