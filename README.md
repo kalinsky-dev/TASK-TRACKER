@@ -63,7 +63,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `node server.js`
+```cd server && node server.js```
 
 Runs the server. 
 Be careful to run the server from the server folder in a separate terminal.
