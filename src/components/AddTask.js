@@ -48,7 +48,7 @@ const AddTask = () => {
   const validateName = (e) => {
     const name = e.target.value;
     let errorMessage = '';
-    if (name.length === 0) {
+    if (name.length === 0 || !isNaN(name)) {
       errorMessage = 'Please write a valid name.'
     }
     setFormError(state => ({
@@ -60,7 +60,7 @@ const AddTask = () => {
   const validateDescription = (e) => {
     const description = e.target.value;
     let errorMessage = '';
-    if (description.length === 0) {
+    if (description.length === 0 || !isNaN(description)) {
       errorMessage = 'Please write a valid description.'
     }
     setFormError(state => ({
@@ -73,7 +73,7 @@ const AddTask = () => {
     e.preventDefault();
 
     if (isFormValid) {
-    
+
       const taskData = {
         name: '',
         description: '',
