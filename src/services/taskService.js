@@ -1,13 +1,17 @@
 import * as request from "./requester";
 
-const baseUrl = 'http://localhost:3030/data/tasks';
+const baseUrl = process.env.NODE_ENV === 'development'
+  ? 'http://localhost:3030'
+  : 'http://localhost:3030'; // TODO: Add server url when deployed
 
-export const getAll = () => request.get(baseUrl);
+const url = `${baseUrl}/data/tasks`;
 
-export const getOne = (taskId) => request.get(`${baseUrl}/${taskId}`)
+export const getAll = () => request.get(url);
 
-export const create = (taskData) => request.post(baseUrl, taskData);
+export const getOne = (taskId) => request.get(`${url}/${taskId}`)
 
-export const edit = (taskId, taskData) => request.put(`${baseUrl}/${taskId}`, taskData);
+export const create = (taskData) => request.post(url, taskData);
 
-export const remove = (taskId) => request.del(`${baseUrl}/${taskId}`);
+export const edit = (taskId, taskData) => request.put(`${url}/${taskId}`, taskData);
+
+export const remove = (taskId) => request.del(`${url}/${taskId}`);
