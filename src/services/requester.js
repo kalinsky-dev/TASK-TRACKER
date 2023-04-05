@@ -27,23 +27,15 @@ const request = async (method, url, data) => {
 
   try {
     const response = await buildRequest;
-    // console.log(response);
-    // console.log(response.status);
 
     if (response.ok !== true) {
       const error = await response.json();
-      // console.log(error);
       throw new Error(error.message)
     } else {
       const result = await response.json();
-      // console.log(result);
       return result;
     }
-    // console.log(response);
-    // const result = await response.json();
-    // return result;
   } catch (error) {
-    // console.log(error);
     throw error;
   }
 };
