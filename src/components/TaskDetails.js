@@ -59,11 +59,8 @@ const TaskDetails = () => {
   const validateName = (e) => {
     const name = e.target.value;
     let errorMessage = '';
-    if (name.length === 0) {
-      errorMessage = 'Please write a name of the Task.';
-    }
-    if (!isNaN(name)) {
-      errorMessage = 'Please write a valid name.';
+    if (name.length === 0 || !isNaN(name)) {
+      errorMessage = 'Please write a valid name of the Task.';
     }
     setFormError(state => ({
       ...state,
@@ -74,11 +71,8 @@ const TaskDetails = () => {
   const validateDescription = (e) => {
     const description = e.target.value;
     let errorMessage = '';
-    if (description.length === 0) {
-      errorMessage = 'Please write a description of the Task.';
-    }
-    if (!isNaN(description)) {
-      errorMessage = 'Please write a valid description.';
+    if (description.length === 0 || !isNaN(description)) {
+      errorMessage = 'Please write a valid description of the Task.';
     }
     setFormError(state => ({
       ...state,
