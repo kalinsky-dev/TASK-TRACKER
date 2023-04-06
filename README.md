@@ -45,6 +45,7 @@ Once authenticated a user can Create, Read, Update, Take/Finish, Delete and Sort
 - Front-end built with React
 - Softuni-Pracite-Server for authentication and data storage
 - JEST, React Testing Library for Component Unit Testing
+- Deploy in Firebese: https://react-task-tracker-1afbe.web.app/
 
 
 # Getting Started with Create React App
