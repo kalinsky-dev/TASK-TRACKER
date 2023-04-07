@@ -31,7 +31,6 @@ const Header = ({ title }) => {
         };
         return a.hoursOfWork - b.hoursOfWork;
       });
-
       // Return different ref form the tasks array
       sortedData = sortedTasks.slice();
       sortTaskHandler(sortedData);
