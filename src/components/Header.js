@@ -35,8 +35,6 @@ const Header = ({ title }) => {
       sortedData = sortedTasks.slice();
       sortTaskHandler(sortedData);
     }
-
-
   }
 
   return (
