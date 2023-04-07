@@ -37,7 +37,7 @@ Once authenticated a user can Create, Read, Update, Take/Finish, Delete and Sort
 - When the Task is finished an X icon on the right top corner is shown and the user can Delete it from there.
 - The Task can be deleted also by double click.
  7. Sort:
- - If Tasks are more than one, a Sort button is shown and everybody can Sort all Tasks in the system by their working hours in ascending order. Tasks, which are still not taken are arranged on the bottom of the board. If there is no task taken, the button does not rearange.
+ - If Tasks are more than one, a Sort button is shown and everybody can Sort all Tasks in the system by their working hours in ascending order. Tasks, which are still not taken are arranged on the bottom of the board. If there is no task taken, the button does not rearrange.
 
 
 ### Used technologies
