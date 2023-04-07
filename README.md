@@ -32,12 +32,12 @@ Once authenticated a user can Create, Read, Update, Take/Finish, Delete and Sort
  - The user who has taken the Task can Finish it, by dobule click on the Task in the board, submitting his working hours.
  If the Task is clicked by person, who has not taken it directly, a message is shown that the Task is in a Progress.
  6. Delete:
-- only the creator of the Task can Delete it, but only if it is not in Pogress.
-- if the Task is in Progress, it can not be deleted by anyone.
+- Only the creator of the Task can Delete it, but only if it is not in Pogress.
+- If the Task is in Progress, it can not be deleted by anyone.
 - When the Task is finished an X icon on the right top corner is shown and the user can Delete it from there.
 - The Task can be deleted also by double click.
  7. Sort:
- - if Tasks are more than one, a Sort button is shown and everybody can Sort all Tasks in the system by their working hours in ascending order. Tasks, which are still not taken are arranged on the bottom of the board.
+ - If Tasks are more than one, a Sort button is shown and everybody can Sort all Tasks in the system by their working hours in ascending order. Tasks, which are still not taken are arranged on the bottom of the board. If there is no task taken, the button does not rearange.
 
 
 ### Used technologies
