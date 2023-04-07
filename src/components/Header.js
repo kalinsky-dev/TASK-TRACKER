@@ -15,21 +15,29 @@ const Header = ({ title }) => {
 
   const onSortHandler = () => {
 
-    let sortedData = [];
+    const hasFinishedTask = tasks.find(x => x.hoursOfWork !== 0)
+ 
+    if (!hasFinishedTask) {
+      return;
+    } else {
+      let sortedData = [];
 
-    let sortedTasks = tasks.sort((a, b) => {
-      if (a.hoursOfWork === Number(0)) {
-        return 1;
-      };
-      if (b.hoursOfWork === Number(0)) {
-        return -1;
-      };
-      return a.hoursOfWork - b.hoursOfWork;
-    });
+      let sortedTasks = tasks.sort((a, b) => {
+        if (a.hoursOfWork === Number(0)) {
+          return 1;
+        };
+        if (b.hoursOfWork === Number(0)) {
+          return -1;
+        };
+        return a.hoursOfWork - b.hoursOfWork;
+      });
 
-    // Return different ref form the tasks array
-    sortedData = sortedTasks.slice();
-    sortTaskHandler(sortedData);
+      // Return different ref form the tasks array
+      sortedData = sortedTasks.slice();
+      sortTaskHandler(sortedData);
+    }
+
+
   }
 
   return (
