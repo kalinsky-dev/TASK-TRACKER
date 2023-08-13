@@ -27,7 +27,7 @@ Once authenticated a user can Create, Read, Update, Take/Finish, Delete and Sort
  - By double click of the Task in the board, the user can update it (change its Name or Description), 
  but only if it is the Creator and the Task is not in a progress. The Task can also not be updated, if it is Finished.
  4. Take:
- - By double click of the Task in the board, the user can Take it, but only if it is still available(not in Progress)
+ - By double click of the Task in the board, the user can Take it, but only if it is still available(not in Progress).
  5. Finish:
  - The user who has taken the Task can Finish it, by dobule click on the Task in the board, submitting his working hours.
  If the Task is clicked by person, who has not taken it directly, a message is shown that the Task is in a Progress.
