@@ -68,6 +68,10 @@ body {
   justify-content: space-between;
 }
 
+.task:hover {
+  transform: scale(1.02);
+}
+
 .add-form {
   margin-bottom: 40px;
 }
