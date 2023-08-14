@@ -25,10 +25,10 @@ const Task = ({
       {(isFinished && ifOwner) ? <h3>{name} <FaTimes style={{ color: 'red', cursor: 'pointer' }} onClick={() => onDeleteClickHandler(_id)} /> </h3> : <h3>{name}</h3>}
       <h4>Description: {description}</h4>
       <p>Task is created by: {owner}</p>
-      {takenByUser ? <p>Task is taken by: {takenByUser}</p> : <p>This task is not taken yet!</p>}
-      {inProgress && <p>Task is in progress!</p>}
-      {isFinished && <p>Task is resolved for: {hoursOfWork} hours.</p>}
-    </div>
+      {takenByUser ? <p style={{ color: 'red' }}>Task is taken by: {takenByUser}</p> : <p style={{ color: 'red' }}>This task is not taken yet!</p>}
+      {inProgress && <p style={{ color: 'red' }}>Task is in progress!</p>}
+      {isFinished && <p style={{ color: 'red' }}>Task is resolved for: {hoursOfWork} hours.</p>}
+    </div >
   );
 };
 
