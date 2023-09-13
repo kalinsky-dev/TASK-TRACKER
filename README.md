@@ -72,7 +72,7 @@ cd server && node server.js
 ```
 Runs the server. 
 Be careful to run the server from the server folder in a separate terminal.
-You can find more details on the:<a href="https://github.com/softuni-practice-server/softuni-practice-server/blob/master/README.md">Link</a> 
+<br>You can find more details on the:<a href="https://github.com/softuni-practice-server/softuni-practice-server/blob/master/README.md">Link</a> 
 
 
 ```
