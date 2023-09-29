@@ -53,7 +53,7 @@ Once authenticated a user can Create, Read, Update, Take/Finish, Delete and Sort
 
 ### Used Technologies & Dependencies
 
-- Front-end built with React
+- Front-end built with ReactJS+JSX
 - Softuni-Pracite-Server for authentication and data storage
 - JEST, React Testing Library for Component Unit Testing
 - react-router-dom
